@@ -1,8 +1,11 @@
+html {
+    background: rgb(79,210,84) url(/img/gm.png) no-repeat center center fixed;
+    background-size: cover;
+}
+
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: transparent url(/img/gm.png) no-repeat;
-    background-size: cover;
 }
 
 h1 {
@@ -13,4 +16,43 @@ h1 {
     text-shadow: 0 0 1px #148989;
     display: block;
     text-align: center;
+}
+
+@media only screen
+and (max-width:960px) {
+    h1 {
+        font-size: 3em;
+        margin-top: 0;
+    }
+}
+
+/* iPhone <5 */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    html {
+        background-position: -20px center;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-top: 0;
+    }
+}
+
+/* iPhone 5+ */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-device-pixel-ratio: 2)
+and (device-aspect-ratio: 40/71)
+and (orientation:portrait) {
+    html {
+        background-position: -60px center;
+    }
+
+    h1 {
+        font-size: 3em;
+        margin-top: 0;
+    }
 }
