@@ -1,0 +1,16 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: transparent url(/img/gm.png) no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    font-family: "OCR A Std", "Courier New", sans-serif;
+    text-transform: uppercase;
+    font-size: 6em;
+    color: #00686B;
+    text-shadow: 0 0 1px #148989;
+    display: block;
+    text-align: center;
+}

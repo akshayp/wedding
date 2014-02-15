@@ -1,0 +1,38 @@
+{
+    "name": "wedding",
+    "version": "0.0.1",
+    "author": "Akshay Patel <akshayrpatel@gmail.com>",
+    "private": true,
+    "engines": {
+        "node": "0.10.x",
+        "test": "istanbul cover --print summary _mocha -- -R spec && ((cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js) || exit 0)"
+    },
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "3.4.6",
+        "express3-handlebars": "0.5.0",
+        "combohandler": "0.3.8"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.7.2",
+        "grunt-contrib-uglify": "~0.2.4",
+        "grunt-contrib-concat": "~0.3.0",
+        "request": "~2.27.0",
+        "time-grunt": "~0.1.1",
+        "load-grunt-tasks": "~0.2.0",
+        "mocha": "*",
+        "chai": "*",
+        "istanbul": "*",
+        "supertest": "*",
+        "coveralls": "2.1.0",
+        "traverse": "0.6.6"
+    },
+    "subdomain": "akshali",
+    "domains": [
+        "akshali.me",
+        "www.akshali.me"
+    ]
+}
