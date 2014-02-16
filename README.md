@@ -1,4 +1,0 @@
-wedding
-=======
-
-Wedding Site
