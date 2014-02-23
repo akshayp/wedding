@@ -5,11 +5,16 @@ html {
 
 body {
     padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+    font-family: "Quantico", sans-serif;
 }
 
 h1 {
-    font-family: "OCR A Std", "Courier New", sans-serif;
     text-transform: uppercase;
     font-size: 6em;
     color: #00686B;
@@ -21,8 +26,17 @@ h1 {
 @media only screen
 and (max-width:960px) {
     h1 {
-        font-size: 3em;
+        font-size: 5em;
         margin-top: 0;
+    }
+}
+
+/*Tablet Background*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)  {
+    html {
+        background-position: -80px center;
     }
 }
 
