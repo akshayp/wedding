@@ -4,7 +4,6 @@ var express = require('express'),
     exphbs  = require('express3-handlebars'),
     app     = express(),
     http    = require('http'),
-    routes  = require('./routes'),
     combo   = require('combohandler'),
     hbs;
 
@@ -26,7 +25,8 @@ app.configure('production', function () {
     app.enable('view cache');
 });
 
-app.get('/', routes.index);
+app.get('/', require('./routes/index'));
+//app.get('/api', require('./routes/api'));
 app.get('/combo', combo.combine({ rootPath: 'public' }), combo.respond);
 
 http.createServer(app).listen(app.get('port'), function () {
