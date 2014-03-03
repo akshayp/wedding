@@ -1,14 +1,14 @@
 {
     "name": "wedding",
-    "version": "0.0.1-1",
+    "version": "0.0.1-2",
     "author": "Akshay Patel <akshayrpatel@gmail.com>",
     "private": true,
     "engines": {
-        "node": "0.10.x",
-        "test": "istanbul cover --print summary _mocha -- -R spec && ((cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js) || exit 0)"
+        "node": "0.10.x"
     },
     "scripts": {
-        "start": "node app"
+        "start": "node app",
+        "test": "istanbul cover --print summary _mocha -- -R spec && ((cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js) || exit 0)"
     },
     "dependencies": {
         "express": "3.4.6",
