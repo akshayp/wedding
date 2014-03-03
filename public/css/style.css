@@ -55,6 +55,13 @@ p {
     width: 250px;
 }
 
+.details a img {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-top: 0;
+}
+
 @media only screen
 and (max-width:960px) {
     h1 { font-size: 5rem; }
