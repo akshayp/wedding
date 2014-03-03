@@ -81,7 +81,7 @@ and (max-device-width : 480px) {
     .details h3 { font-size: 2rem; }
 }
 
-/* iPhone <5 Landscape */
+/* iPhone <5 Landscape overrides */
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px)
@@ -100,6 +100,7 @@ and (max-device-width: 568px)
 and (-webkit-device-pixel-ratio: 2)
 and (device-aspect-ratio: 40/71)
 and (orientation:portrait) {
-    html { background-position: -60px 0; }
+    html { background-position: -60px 130px; }
+    .details { margin: 10px auto 240px; font-size: 1rem; }
     h1 { font-size: 3rem; }
 }
