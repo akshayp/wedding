@@ -9,6 +9,7 @@ var express = require('express'),
 
 app.use(express.compress());
 app.use(express.static('public'));
+app.use(express.logger());
 app.use(app.router);
 
 hbs = exphbs.create({
