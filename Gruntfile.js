@@ -9,12 +9,14 @@ module.exports = function (grunt) {
             all: ['Gruntfile.js', '{conf,public,tasks,test}/**/*.js', 'app.js', 'index.js', '!public/vendor/**/*.js', '!public/js/vendor.js']
         },
         vendor: {
-            pure: 'http://yui.yahooapis.com/pure/0.4.2/pure-min.css',
-            html5shiv: 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
+            pure: 'http://yui.yahooapis.com/pure/0.5.0/pure-min.css',
+            html5shiv: 'http://html5shiv.googlecode.com/svn/trunk/html5.js',
+            mapbox: 'https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.js',
+            mapboxcss: 'https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.css'
         },
         concat: {
             js: {
-                src: ['public/vendor/rainbow/rainbow.js', 'public/vendor/**/*.js'],
+                src: ['public/vendor/**/*.js'],
                 dest: 'public/js/vendor.js'
             },
             css: {
