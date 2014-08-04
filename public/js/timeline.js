@@ -25,7 +25,6 @@
     var timelineblocks = arrayify(document.querySelectorAll('.timeline-block')),
         winHeight = window.innerHeight;
 
-
     timelineblocks.forEach(function (node) {
         if (offset(node) > scrollTop() + winHeight * 0.75) {
             var hideEls = arrayify(node.querySelectorAll('.timeline-marker, .timeline-content'));
@@ -34,7 +33,6 @@
             });
         }
     });
-
 
     setInterval(function() {
         if(didScroll) {
@@ -50,7 +48,7 @@
             }
         });
         }
-    }, 200);
+    }, 100);
 
 
     window.onscroll = function showTimeline() {
