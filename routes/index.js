@@ -1,9 +1,11 @@
+var fe = require('./fe');
+
 module.exports = {
     // FE routes
-    index: require('./fe/home'),
-    wedding: require('./fe/wedding'),
-    logistics: require('./fe/logistics'),
-    registry: require('./fe/registry'),
+    index: fe.home,
+    wedding: fe.wedding,
+    logistics: fe.logistics,
+    registry: fe.registry,
     rsvp: require('./fe/rsvp'),
     // API routes
     invitations: require('./api/invitations'),
