@@ -1,10 +1,9 @@
-var async = require('async'),
-    path  = require('path'),
-    config = require('../config'),
-    error        = require('../lib/utils').error,
-    sendRsvpLink = require('../lib/email').sendRsvpLink,
-    invs         = require('../lib/invitations'),
-    guests       = require('../lib/guests');
+var path  = require('path'),
+    config = require('../../config'),
+    error        = require('../../lib/utils').error,
+    sendRsvpLink = require('../../lib/email').sendRsvpLink,
+    invs         = require('../../lib/invitations'),
+    guests       = require('../../lib/guests');
 
 function afterWedding () {
     return Date.now() > config.date;
@@ -12,24 +11,22 @@ function afterWedding () {
 
 function pub(req, res, next) {
     if (afterWedding()) {
-        delete req.session.invitation;
         return res.render('rsvp/after');
     }
 
-    if (req.invitation) {
+    if (!req.invitation) {
         return next();
     }
 
     res.locals.resent = req.session.resent;
     delete req.session.resent;
 
-    res.render('rsvp/public');
+    res.render('rsvp/index', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp' });
 }
 
 function resend(req, res, next) {
     var email = req.body.email.trim();
 
-    // Always redirect to "/rsvp/" after the wedding.
     if (afterWedding()) {
         return res.redirect('/rsvp/');
     }
@@ -47,7 +44,7 @@ function resend(req, res, next) {
             return res.redirect('/rsvp/');
         }
 
-        invs.loadInvitation(guest.invitation_id, function (err, invitation) {
+        invs.loadInvitation(guest.invitation.id, function (err, invitation) {
             if (err) { return next(err); }
 
             sendRsvpLink(invitation, {
@@ -66,16 +63,14 @@ function resend(req, res, next) {
 function login(req, res, next) {
     var invitationId;
 
-    // Prevent RSVP logins after the wedding has happened, and _always_ redirect
-    // to "/rsvp/".
     if (afterWedding()) {
         delete req.session.invitation;
         return res.redirect('/rsvp/');
     }
 
     try {
-        invitationId = invs.decipherId(req.params.invitation_key);
-    } catch (ex) {
+        invitationId = invs.decipherId(req.params.invitationkey);
+    } catch (e) {
         delete req.session.invitation;
         return next(error(401));
     }
@@ -94,28 +89,17 @@ function login(req, res, next) {
 
 function edit(req, res) {
     var invitation = req.invitation,
-        guestsAttending, guestsNeedMeal;
-
-    res.locals.meals = guests.MEALS;
-    res.expose(guests.MEALS, 'MEALS');
+        attending;
 
     if (!invitation.rsvpd) {
         return res.render('rsvp/respond');
     }
 
-    guestsAttending = invitation.guests.some(function (guest) {
-        return guest.is_attending;
+    attending = invitation.guests.some(function (guest) {
+        return guest.attending;
     });
 
-    if (guestsAttending) {
-        guestsNeedMeal = invitation.guests.some(function (guest) {
-            return guest.is_attending && !guest.meal;
-        });
-
-        res.locals.status = guestsNeedMeal ?
-            'Choose which Main Course you would like.' :
-            'Everything is set with your invitation response.';
-
+    if (attending) {
         res.render('rsvp/attending');
     } else {
         res.render('rsvp/not-attending');

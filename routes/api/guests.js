@@ -1,4 +1,4 @@
-var guests = require('../lib/guests');
+var guests = require('../../lib/guests');
 
 exports.read   = read;
 exports.update = update;
