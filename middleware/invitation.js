@@ -1,4 +1,4 @@
-var invs = require('../lib/invitations');
+var guests = require('../lib/guests');
 
 module.exports = function (req, res, next) {
     var invitationId = req.session.invitation,
@@ -17,7 +17,7 @@ module.exports = function (req, res, next) {
         return next();
     }
 
-    invs.loadInvitation(invitationId, function (err, invitation) {
+    guests.loadInvitation(invitationId, function (err, invitation) {
         if (err) { return next(err); }
 
         req.invitation        = invitation;
