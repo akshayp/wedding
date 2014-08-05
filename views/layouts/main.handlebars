@@ -3,31 +3,29 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Vaishali + Akshay</title>
+    <title>{{title}}</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/combo/{{version}}/?css/vendor.css&css/anim.css&/css/style.css" type="text/css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Quantico" type="text/css">
     <link rel="index" title="{title}" href="http://www.akshali.me">
 </head>
 <body>
-<div id="doc" class="pure-g-r">
-    <header class="pure-u-1-1">
-      <h1>Vaishali + Akshay</h1>
-      <nav>
-        <ul>
-          {{#each nav}}
-          <li class="{{#if isActive}}is-nav-item-active{{/if}}">
-            <a href="{{url}}"><b>{{label}}</b></a>
-          </li>
-          {{/each}}
-        </ul>
-      </nav>
+    <header>
+        <a href="/"><h1>Vaishali + Akshay</h1></a>
+        <nav>
+            <ul>
+                {{#each nav}}
+                <li class="{{#eq id compare=../active}}active{{/eq}}">
+                    <a href="{{url}}"><b>{{label}}</b></a>
+                </li>
+                {{/each}}
+            </ul>
+        </nav>
     </header>
-    <div id="main" class="pure-u-1-1">
+    <div id="main">
         {{{body}}}
     </div>
-</div>
-<script async src="/combo/{{version}}/?js/vendor.js&js/timeline.js"></script>
+<script async src="/combo/{{version}}/?js/vendor.js&js/main.js&js/timeline.js&js/maps.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
