@@ -34,7 +34,14 @@ router = express.Router({
 
 hbs = exphbs.create({
     defaultLayout: 'main',
-    helpers: {}
+    helpers: {
+        eq: function (context, options) {
+            if (context === options.hash.compare) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        }
+    }
 });
 
 app.set('port', process.env.PORT || 3000);
@@ -84,7 +91,8 @@ app.get('/logistics/', routes.logistics);
 app.get('/registry/', routes.registry);
 app.get('/rsvp/', routes.rsvp.pub, routes.rsvp.edit);
 app.post('/rsvp/', routes.rsvp.resend);
-app.get('/rsvp/:invitation_key', routes.rsvp.login);
+app.get('/rsvp/:invitationkey', routes.rsvp.login);
+
 app.all('/invitations/:invitation/*', middleware.auth.ensureInvitation);
 app.get('/invitations/:invitation/', routes.invitations.read);
 app.put('/invitations/:invitation/', routes.invitations.update);
