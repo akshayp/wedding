@@ -32,7 +32,7 @@ function resend(req, res, next) {
     }
 
     if (!email) {
-        req.session.resent = {needsEmail: true};
+        req.session.resent = { needsEmail: true };
         return res.redirect('/rsvp/');
     }
 
