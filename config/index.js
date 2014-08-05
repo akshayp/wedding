@@ -3,7 +3,7 @@ var env = process.env,
 
 module.exports = {
 
-    database: env.DATABASE_URL,
+    database: env.CONNECTION_STRING || 'mongodb://localhost/wedding',
 
     session: {
         keys   : ['akshali.session'],
