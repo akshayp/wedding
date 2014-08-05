@@ -1,6 +1,6 @@
-var email  = require('../lib/email'),
-    invs   = require('../lib/invitations'),
-    utils  = require('../lib/utils'),
+var email  = require('../../lib/email'),
+    invs   = require('../../lib/invitations'),
+    utils  = require('../../lib/utils'),
 
     extend = utils.extend;
 
