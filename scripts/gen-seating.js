@@ -25,7 +25,7 @@ invs.loadInvitations(function (err, invitations) {
 
         // Include if guests who RSVPd "Yes".
         invitation.guests.forEach(function (guest) {
-            if (guest.is_attending) {
+            if (guest.attending) {
                 guests.push(guest);
             }
         });

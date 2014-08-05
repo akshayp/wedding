@@ -27,9 +27,6 @@ module.exports = {
     },
 
     dirs: {
-        //views   : path.resolve('views/pages/'),
-        //layouts : path.resolve('views/layouts/'),
-        //partials: path.resolve('views/partials/'),
         emails  : path.resolve('views/emails/')
     },
 
