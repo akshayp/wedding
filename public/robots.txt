@@ -17,3 +17,6 @@ Disallow: /*.png$
 Disallow: /*.zip$
 Disallow: /*.Zip$
 Disallow: /*.ZIP$
+Disallow: /guests/
+Disallow: /invitations/
+Disallow: /rsvp/
