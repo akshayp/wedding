@@ -41,7 +41,7 @@ function sendReminderEmails() {
 
             // Include if some guests RSVPd "Yes".
             return invitation.guests.some(function (guest) {
-                return guest.is_attending;
+                return guest.attending;
             });
         });
 
