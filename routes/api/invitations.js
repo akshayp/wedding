@@ -1,28 +1,18 @@
 var email  = require('../../lib/email'),
-    invs   = require('../../lib/invitations'),
-    utils  = require('../../lib/utils'),
+    guests   = require('../../lib/guests');
 
-    extend = utils.extend;
-
-exports.read       = read;
-exports.update     = update;
-exports.readGuests = readGuests;
-exports.confirm    = confirm;
-
-function read(req, res, next) {
+function read(req, res) {
     res.json(req.invitation);
 }
 
 function update(req, res, next) {
-    var updates = extend({}, req.body, {rsvpd: true});
-
-    invs.updateInvitation(req.invitation.id, updates, function (err) {
+    guests.updateInvitation(req.invitation.id, { rsvpd: true }, function (err) {
         if (err) { return next(err); }
         res.send(204);
     });
 }
 
-function readGuests(req, res, next) {
+function readGuests(req, res) {
     res.json(req.invitation.guests);
 }
 
@@ -32,3 +22,8 @@ function confirm(req, res, next) {
         res.send(204);
     });
 }
+
+exports.read       = read;
+exports.update     = update;
+exports.readGuests = readGuests;
+exports.confirm    = confirm;

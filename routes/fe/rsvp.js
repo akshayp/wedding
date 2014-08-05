@@ -1,8 +1,6 @@
 var path  = require('path'),
     config = require('../../config'),
-    error        = require('../../lib/utils').error,
     sendRsvpLink = require('../../lib/email').sendRsvpLink,
-    invs         = require('../../lib/invitations'),
     guests       = require('../../lib/guests');
 
 function afterWedding () {
@@ -44,7 +42,7 @@ function resend(req, res, next) {
             return res.redirect('/rsvp/');
         }
 
-        invs.loadInvitation(guest.invitation.id, function (err, invitation) {
+        guests.loadInvitation(guest.invitation.id, function (err, invitation) {
             if (err) { return next(err); }
 
             sendRsvpLink(invitation, {
@@ -69,13 +67,15 @@ function login(req, res, next) {
     }
 
     try {
-        invitationId = invs.decipherId(req.params.invitationkey);
+        invitationId = email.decipherId(req.params.invitationkey);
     } catch (e) {
         delete req.session.invitation;
-        return next(error(401));
+        var err = new Error('Unauthorized request.');
+        err.status = 401;
+        return next(err);
     }
 
-    invs.loadInvitation(invitationId, function (err, invitation) {
+    guests.loadInvitation(invitationId, function (err, invitation) {
         if (err || !invitation) {
             delete req.session.invitation;
             return next(err);

@@ -1,5 +1,3 @@
-var error = require('../lib/utils').error;
-
 function checkGuest(req, res, next) {
     var invitation = req.invitation,
         guestId    = req.params.guest,
@@ -36,7 +34,9 @@ function isAuthorized(req, res, next) {
     if (req.isAuthorized) {
         next();
     } else {
-        next(error(401));
+        var err = new Error('Unauthorized request.');
+        err.status = 401;
+        next(err);
     }
 }
 
