@@ -18,7 +18,7 @@ function checkGuest(req, res, next) {
     });
 
     req.guest        = guest;
-    req.isAuthorized = guest && guest.invitation_id === invitation.id;
+    req.isAuthorized = guest && guest.invitation.id === invitation.id;
 
     next();
 }
