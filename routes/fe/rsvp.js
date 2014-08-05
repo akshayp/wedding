@@ -14,7 +14,7 @@ function pub(req, res, next) {
         return res.render('rsvp/after');
     }
 
-    if (!req.invitation) {
+    if (req.invitation) {
         return next();
     }
 
