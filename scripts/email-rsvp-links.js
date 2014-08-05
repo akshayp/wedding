@@ -1,9 +1,34 @@
 #!/usr/bin/env node
 
 var async = require('async'),
-
+    colors = require('colors'),
     email = require('../lib/email'),
-    invs  = require('../lib/invitations');
+    guests  = require('../lib/guests');
+
+function sendEmail(guest, callback) {
+    email.sendRsvpLink(guest, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Sent RSVP link to Invitation: '.yelllow + guest.email.cyan);
+        }
+
+        callback(null);
+    });
+}
+
+function sendRsvpEmails() {
+    console.log('Loading invitations from database...'.blue);
+
+    guests.loadGuests(function (err, guests) {
+        if (err) { throw err; }
+
+        async.eachSeries(guests, sendEmail, function () {
+            console.log('Done!'.green);
+            process.exit();
+        });
+    });
+}
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
@@ -15,32 +40,7 @@ process.stdin.once('data', function (answer) {
     if (answer === 'yes') {
         sendRsvpEmails();
     } else {
-        console.log('Aborting!');
+        console.log('Aborting!'.red);
         process.exit();
     }
 });
-
-function sendRsvpEmails() {
-    console.log('Loading invitations from database...');
-
-    invs.loadInvitations(function (err, invitations) {
-        if (err) { throw err; }
-
-        async.eachSeries(invitations, sendEmail, function (err) {
-            console.log('Done!');
-            process.exit();
-        });
-    });
-}
-
-function sendEmail(invitation, callback) {
-    email.sendRsvpLink(invitation, function (err, res, body) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Sent RSVP link to Invitation: ' + invitation.id + ' recipients.');
-        }
-
-        callback(null);
-    });
-}
