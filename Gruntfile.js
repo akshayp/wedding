@@ -38,5 +38,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
 
+    grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('assets', ['vendor', 'concat', 'uglify']);
 };
