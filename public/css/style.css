@@ -5,8 +5,7 @@ html {
 }
 
 html, button, input, select, textarea,
-.pure-g [class *= "pure-u"],
-.pure-g-r [class *= "pure-u"] {
+.pure-g [class *= "pure-u"] {
     font-family: "Quantico", sans-serif;
 }
 
@@ -24,11 +23,12 @@ h1 {
 h2 {
     text-transform: uppercase;
     font-size: 4rem;
+    margin: 0.2em 0;
     text-align: center;
 }
 
 p {
-    margin: 0.5em 0;
+    font-size: 1.5rem;
 }
 
 header {
@@ -38,13 +38,19 @@ header {
     padding: 0 6% 0 18%;
 }
 
+header > a {
+    float: left;
+    display: inline-block;
+}
+
 header a {
     text-decoration: none;
     color: #FFF;
 }
 
-header a:hover {
-    color: #DDD;
+header a:hover,
+header li.active a {
+    color: #9A9A9A;
 }
 
 nav {
@@ -61,22 +67,35 @@ nav li {
     list-style: none;
 }
 
-.akshali {
+.right {
+    float: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.banner {
     height: 535px;
     overflow: hidden;
     position: relative;
 }
 
-.akshali img {
+.banner img {
     position: absolute;
     top: -250px;
     left: 0;
-    display: block;
-    min-width: 100%;
-    min-height: 100%;
 }
 
-.akshali time {
+.registry {
+    height: 335px;
+}
+
+.registry img {
+    top: -80px;
+}
+
+.banner time {
     position: absolute;
     top: 30%;
     font-size: 10rem;
@@ -84,10 +103,72 @@ nav li {
     color: #00686B;
 }
 
-.story {
+.round-l-img {
+    border-radius: 50%;
+    border: 10px solid #FFF;
+    width: 350px;
+    height: 350px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.details {
     color: #222;
-    margin: 30px auto;
+    padding: 30px 20px;
+    text-align: center
+}
+
+.details p {
     max-width: 800px;
+    margin: 0 auto;
+}
+
+.logistics,
+.rsvp {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.rsvp {
+    margin-top: 20px;
+}
+
+.rsvp h3 {
+    text-align: center;
+}
+
+.rsvp form {
+    font-size: 2rem;
+}
+
+.pure-form-aligned .pure-control-group .input-wide {
+    width: 20em;
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pure-form-aligned .pure-control-group {
+    margin-bottom: 1.5em;
+}
+
+.logistics .pure-g {
+    margin: 20px 0;
+}
+
+.ceremony {
+    color: #FFF;
+    background: #000;
+}
+
+.cocktails {
+    color: #FFF;
+    background: #2D3E50;
+}
+
+.reception {
+    color: #FFF;
+    background: #1F8DD6;
 }
 
 #timeline {
@@ -120,6 +201,16 @@ nav li {
     font-size: 4rem;
     height: 100%;
     color: #F07677;
+}
+
+.map-l {
+    width:100%;
+    height: 400px;
+}
+
+.map-s {
+    width: 100%;
+    height: 250px;
 }
 
 @media only screen and (min-width: 1170px) {
