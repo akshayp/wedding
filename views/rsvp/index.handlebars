@@ -1,29 +1,24 @@
 <div class="rsvp">
-    <h2> RSVP for our wedding!</h2>
+    <h2>RSVP for our wedding!</h2>
     <form class="pure-form pure-form-aligned" action="/rsvp/" method="POST">
-        <input type="hidden" name="csrf" value="{{_csrf}}"/>
+        <input type="hidden" name="csrf" value="{{csrf}}"/>
         <fieldset>
             <div class="pure-control-group">
-                <label for="name">Name(s) *</label>
+                <label for="name">Name*</label>
                 <input id="name" type="text" placeholder="Name(s)" required="1" class="pure-u-3-5">
-            </div>
-
-            <div class="pure-control-group">
-                <label for="name">RSVP code</label>
-                <input id="name" type="text" placeholder="RSVP code" required="1" class="pure-u-3-5">
             </div>
 
             <div class="pure-control-group">
                 <label>RSVP*</label>
                 <div class="pure-u-3-5">
                     <label for="option-two" class="pure-radio input-wide">
-                    <input id="option-two" type="radio" name="rsvp" value="yes" required="1">
-                    Happily accepts. Yeehaw
-                </label>
-                <label for="option-two" class="pure-radio input-wide">
-                    <input id="option-two" type="radio" name="rsvp" value="no" required="1">
-                    No thanks! We don't like you that much
-                </label>
+                        <input id="option-two" type="radio" name="rsvp" value="yes" required="1">
+                        Happily accepts. Yeehaw
+                    </label>
+                    <label for="option-two" class="pure-radio input-wide">
+                        <input id="option-two" type="radio" name="rsvp" value="no" required="1">
+                        No thanks! We don't like you that much
+                    </label>
                 </div>
             </div>
 
@@ -33,12 +28,32 @@
             </div>
 
             <div class="pure-control-group">
+                <label for="guests">Plus One*</label>
+                <input id="guests" type="checkbox">
+            </div>
+
+            <div class="pure-control-group">
+                <label>Events*</label>
+                <div class="pure-u-3-5">
+                    <label for="mehndi" class="pure-radio input-wide">
+                        <input id="mehndi" type="checkbox" name="mehndi" value="1"> Mehndi
+                    </label>
+                    <label for="ceremony" class="pure-radio input-wide">
+                        <input id="ceremony" type="checkbox" name="ceremony" value="1"> Ceremony
+                    </label>
+                    <label for="reception" class="pure-radio input-wide">
+                        <input id="reception" type="checkbox" name="reception" value="1"> Reception
+                    </label>
+                </div>
+            </div>
+
+            <div class="pure-control-group">
                 <label for="textarea">Notes</label>
-                <textarea id="textarea" class="pure-u-3-5" rows="5" placeholder="Leave us a message..."></textarea>
+                <textarea id="textarea" class="pure-u-3-5" rows="3" placeholder="Leave us a message..."></textarea>
             </div>
 
             <div class="pure-controls">
-                <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                <button type="submit" class="pure-button pure-button-primary submit-wide">Submit</button>
             </div>
         </fieldset>
     </form>

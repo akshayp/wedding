@@ -95,12 +95,21 @@ nav li {
     top: -80px;
 }
 
-.banner time {
+.banner .hashtag {
     position: absolute;
     top: 30%;
     font-size: 10rem;
     right: 10%;
+    line-height: 6rem;
     color: #00686B;
+}
+
+.banner .hashtag time {
+    display: block;
+}
+
+.banner .hashtag i {
+    font-size: 4rem;
 }
 
 .round-l-img {
@@ -148,8 +157,12 @@ nav li {
     margin-bottom: 10px;
 }
 
+.rsvp .submit-wide {
+    margin-left: 1.2em;
+}
+
 .pure-form-aligned .pure-control-group {
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
 }
 
 .logistics .pure-g {

@@ -1,5 +1,4 @@
-var env = process.env,
-    path = require('path');
+var env = process.env;
 
 module.exports = {
 
@@ -24,10 +23,6 @@ module.exports = {
 
     email: {
         from: 'Vaishali & Akshay <rsvp@akshali.me>'
-    },
-
-    dirs: {
-        emails  : path.resolve('views/emails/')
     },
 
     date: new Date('Sat Nov 1 2014 6:30:00 GMT-0400 (EDT)'),
