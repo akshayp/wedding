@@ -1,6 +1,9 @@
 /*jshint unused: false*/
 'use strict';
 
+process.env.SESSION_SECRET = 'hodor';
+process.env.INVITATION_SECRET = 'morehodor';
+
  var hbs, app, router, 
     env         = process.env.NODE_ENV || 'development',
     colors      = require('colors'),
@@ -56,7 +59,9 @@ if (env !== 'development') {
 
 /* ----- Middleware ----- */
 
-app.use(logger('combined'));
+app.use(logger('combined', {
+    skip: function (req, res) { return res.statusCode < 400; }
+}));
 app.use(compress());
 app.use(cookie());
 app.use(session(config.session));
@@ -90,18 +95,14 @@ app.get('/', routes.index);
 app.get('/wedding/', routes.wedding);
 app.get('/logistics/', routes.logistics);
 app.get('/registry/', routes.registry);
-app.get('/rsvp/', routes.rsvp.pub, routes.rsvp.edit);
+app.get('/rsvp/', routes.rsvp.index);
 app.post('/rsvp/', routes.rsvp.resend);
 app.get('/rsvp/:invitationkey', routes.rsvp.login);
 
-app.all('/invitations/:invitation/*', middleware.auth.ensureInvitation);
-app.get('/invitations/:invitation/', routes.invitations.read);
-app.put('/invitations/:invitation/', routes.invitations.update);
-app.get('/invitations/:invitation/guests', routes.invitations.readGuests);
-app.post('/invitations/:invitation/confirm', routes.invitations.confirm);
-app.all('/guests/:guest/', middleware.auth.ensureGuest);
-app.get('/guests/:guest/', routes.guests.read);
-app.put('/guests/:guest/', routes.guests.update);
+app.all('/api/invitations/:invitation/*', middleware.auth);
+app.get('/api/invitations/:invitation/', routes.invitations.read);
+app.put('/api/invitations/:invitation/', routes.invitations.update);
+app.post('/api/invitations/:invitation/confirm', routes.invitations.confirm);
 app.get('/combo/:version', combo.combine({ rootPath: 'public' }), combo.respond);
 
 

@@ -1,57 +1,42 @@
 var path  = require('path'),
     config = require('../../config'),
-    sendRsvpLink = require('../../lib/email').sendRsvpLink,
+    email = require('../../lib/email'),
     guests       = require('../../lib/guests');
 
 function afterWedding () {
     return Date.now() > config.date;
 }
 
-function pub(req, res, next) {
-    if (afterWedding()) {
-        return res.render('rsvp/after');
-    }
-
-    if (req.invitation) {
-        return next();
-    }
-
-    res.locals.resent = req.session.resent;
-    delete req.session.resent;
-
-    res.render('rsvp/index', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp' });
-}
-
 function resend(req, res, next) {
-    var email = req.body.email.trim();
+    var emailAddress = req.body.email.trim();
 
     if (afterWedding()) {
         return res.redirect('/rsvp/');
     }
 
-    if (!email) {
+    if (!emailAddress) {
         req.session.resent = { needsEmail: true };
         return res.redirect('/rsvp/');
     }
 
-    guests.loadGuestByEmail(email, function (err, guest) {
+    guests.loadGuestByEmail(emailAddress, function (err, guest) {
         if (err) { return next(err); }
 
         if (!guest) {
-            req.session.resent = {notGuest: email};
+            req.session.resent = { notGuest: emailAddress };
             return res.redirect('/rsvp/');
         }
 
-        guests.loadInvitation(guest.invitation.id, function (err, invitation) {
+        guests.loadGuestByInvitation(guest.invitation.id, function (err, invitation) {
             if (err) { return next(err); }
 
-            sendRsvpLink(invitation, {
+            email.sendRsvpLink(invitation, {
                 guest : guest,
                 resend: true
             }, function (err) {
                 if (err) { return next(err); }
 
-                req.session.resent = {sent: email};
+                req.session.resent = { sent: emailAddress };
                 res.redirect('/rsvp/');
             });
         });
@@ -59,7 +44,7 @@ function resend(req, res, next) {
 }
 
 function login(req, res, next) {
-    var invitationId;
+    var id;
 
     if (afterWedding()) {
         delete req.session.invitation;
@@ -67,7 +52,7 @@ function login(req, res, next) {
     }
 
     try {
-        invitationId = email.decipherId(req.params.invitationkey);
+        id = email.decipherId(req.params.invitationkey);
     } catch (e) {
         delete req.session.invitation;
         var err = new Error('Unauthorized request.');
@@ -75,38 +60,40 @@ function login(req, res, next) {
         return next(err);
     }
 
-    guests.loadInvitation(invitationId, function (err, invitation) {
-        if (err || !invitation) {
+    guests.loadGuest(id, function (err, guest) {
+        if (err || !guest) {
             delete req.session.invitation;
             return next(err);
         }
 
         // Set the invitation on the session and redirect up one path level.
-        req.session.invitation = invitationId;
+        req.session.invitation = guest.invitation;
         res.redirect(path.resolve(req.path, '..') + '/');
     });
 }
 
-function edit(req, res) {
-    var invitation = req.invitation,
-        attending;
 
-    if (!invitation.rsvpd) {
-        return res.render('rsvp/respond');
+function rsvp(req, res) {
+    var invitation = req.invitation;
+
+    if (afterWedding()) {
+        return res.render('rsvp/after');
     }
 
-    attending = invitation.guests.some(function (guest) {
-        return guest.attending;
-    });
+    res.locals.resent = req.session.resent;
+    delete req.session.resent;
 
-    if (attending) {
-        res.render('rsvp/attending');
+    if (!invitation || !invitation.rsvpd) {
+        return res.render('rsvp/index', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp' });
+    }
+
+    if (invitation.attending) {
+        return res.render('rsvp/attending');
     } else {
-        res.render('rsvp/not-attending');
+        return res.render('rsvp/not-attending');
     }
 }
 
-exports.pub    = pub;
 exports.resend = resend;
 exports.login  = login;
-exports.edit   = edit;
+exports.index  = rsvp;

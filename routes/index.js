@@ -8,6 +8,5 @@ module.exports = {
     registry: fe.registry,
     rsvp: require('./fe/rsvp'),
     // API routes
-    invitations: require('./api/invitations'),
-    guests: require('./api/guests')
+    invitations: require('./api/invitations')
 };

@@ -12,10 +12,6 @@ function update(req, res, next) {
     });
 }
 
-function readGuests(req, res) {
-    res.json(req.invitation.guests);
-}
-
 function confirm(req, res, next) {
     email.sendConfirm(req.invitation, function (err) {
         if (err) { return next(err); }
@@ -25,5 +21,4 @@ function confirm(req, res, next) {
 
 exports.read       = read;
 exports.update     = update;
-exports.readGuests = readGuests;
 exports.confirm    = confirm;
