@@ -1,11 +1,16 @@
 <div class="rsvp">
+    {{#if invitation.attending}}
+        {{> attending}}
+    {{else}}
+        {{> not-attending}}
+    {{/if}}
     <h2>RSVP for our wedding!</h2>
     <form class="pure-form pure-form-aligned" action="/rsvp/" method="POST">
-        <input type="hidden" name="csrf" value="{{csrf}}"/>
+        <input type="hidden" name="_csrf" value="{{csrf}}"/>
         <fieldset>
             <div class="pure-control-group">
                 <label for="name">Name*</label>
-                <input id="name" type="text" placeholder="Name(s)" required="1" class="pure-u-3-5">
+                <input id="name" name="name" type="text" placeholder="Name(s)" required="1" class="pure-u-3-5">
             </div>
 
             <div class="pure-control-group">
@@ -24,32 +29,32 @@
 
             <div class="pure-control-group">
                 <label for="email">Email Address</label>
-                <input id="email" type="email" placeholder="Email Address" class="pure-u-3-5" required="1">
+                <input id="email" name="email" type="email" placeholder="Email Address" class="pure-u-3-5" required="1">
             </div>
 
             <div class="pure-control-group">
-                <label for="guests">Plus One*</label>
-                <input id="guests" type="checkbox">
+                <label for="plusone">Plus One*</label>
+                <input id="plusone" name="plusone" type="checkbox">
             </div>
 
             <div class="pure-control-group">
                 <label>Events*</label>
                 <div class="pure-u-3-5">
                     <label for="mehndi" class="pure-radio input-wide">
-                        <input id="mehndi" type="checkbox" name="mehndi" value="1"> Mehndi
+                        <input id="mehndi" type="checkbox" name="events" value="mehndi"> Mehndi
                     </label>
                     <label for="ceremony" class="pure-radio input-wide">
-                        <input id="ceremony" type="checkbox" name="ceremony" value="1"> Ceremony
+                        <input id="ceremony" type="checkbox" name="events" value="ceremony"> Ceremony
                     </label>
                     <label for="reception" class="pure-radio input-wide">
-                        <input id="reception" type="checkbox" name="reception" value="1"> Reception
+                        <input id="reception" type="checkbox" name="events" value="reception"> Reception
                     </label>
                 </div>
             </div>
 
             <div class="pure-control-group">
                 <label for="textarea">Notes</label>
-                <textarea id="textarea" class="pure-u-3-5" rows="3" placeholder="Leave us a message..."></textarea>
+                <textarea id="textarea" name="notes" class="pure-u-3-5" rows="3" placeholder="Leave us a message..."></textarea>
             </div>
 
             <div class="pure-controls">
