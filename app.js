@@ -1,10 +1,7 @@
 /*jshint unused: false*/
 'use strict';
 
-process.env.SESSION_SECRET = 'hodor';
-process.env.INVITATION_SECRET = 'morehodor';
-
- var hbs, app, router, 
+var hbs, app, router,
     env         = process.env.NODE_ENV || 'development',
     colors      = require('colors'),
     http        = require('http'),
