@@ -1,13 +1,17 @@
-/*globals window, document, offset, scrollTop, arrayify, hasClass*/
+/*globals window, document, arrayify, hasClass*/
 (function (window, document) {
 
-    var didScroll = false;    
+    var didScroll = false;
+    var timelineblocks = arrayify(document.querySelectorAll('.timeline-block'));
 
-    var timelineblocks = arrayify(document.querySelectorAll('.timeline-block')),
-        winHeight = window.innerHeight;
+    function showTimeline() {
+        didScroll = true;
+    }
 
     timelineblocks.forEach(function (node) {
-        if (offset(node) > scrollTop() + winHeight * 0.75) {
+        var cushion = getMargin(node);
+
+        if(!inViewport(node, 400)) {
             var hideEls = arrayify(node.querySelectorAll('.timeline-marker, .timeline-content'));
             hideEls.forEach(function (el) {
                 el.className += ' is-hidden';
@@ -19,7 +23,9 @@
         if(didScroll) {
             didScroll = false;
             timelineblocks.forEach(function (node) {
-            if (offset(node) <= scrollTop() + winHeight * 0.75 && hasClass(node.querySelectorAll('.timeline-marker')[0], 'is-hidden')) {
+            var cushion = getMargin(node);
+
+            if (inViewport(node, cushion) && hasClass(node.querySelectorAll('.timeline-marker')[0], 'is-hidden')) {
 
                 var hideEls = arrayify(node.querySelectorAll('.timeline-marker, .timeline-content'));
                 hideEls.forEach(function (el) {
@@ -31,9 +37,8 @@
         }
     }, 100);
 
+    window.onscroll = showTimeline;
 
-    window.onscroll = function showTimeline() {
-        didScroll = true;
-    };
+    showTimeline();
 
 }(window, document));

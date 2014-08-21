@@ -10,9 +10,15 @@
             var map = L.mapbox.map(mapNode.id, mapNode.getAttribute('data-map'), {
                 zoomControl: false
             })
-            .setView([37.5566, -122.3005], mapNode.getAttribute('data-zoom') || 11);
+            .setView([mapNode.getAttribute('data-lat') || 37.5566, mapNode.getAttribute('data-long') || -122.3005],mapNode.getAttribute('data-zoom') || 11);
 
             map.scrollWheelZoom.disable();
+
+            map.featureLayer.on('ready', function(e) {
+                this.eachLayer(function(marker) { 
+                    marker.openPopup();
+                });
+            });
         });
     }
 
