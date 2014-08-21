@@ -8,6 +8,8 @@ function afterWedding () {
 }
 
 function resend(req, res, next) {
+    console.log(req.body);
+
     var emailAddress = req.body.email.trim();
 
     if (afterWedding()) {
@@ -15,30 +17,25 @@ function resend(req, res, next) {
     }
 
     if (!emailAddress) {
-        req.session.resent = { needsEmail: true };
-        return res.redirect('/rsvp/');
+        return res.redirect('/rsvp/?email=0');
     }
 
     guests.loadGuestByEmail(emailAddress, function (err, guest) {
-        if (err) { return next(err); }
-
-        if (!guest) {
-            req.session.resent = { notGuest: emailAddress };
-            return res.redirect('/rsvp/');
+        if (err) { 
+            return next(err); 
         }
 
-        guests.loadGuestByInvitation(guest.invitation.id, function (err, invitation) {
-            if (err) { return next(err); }
+        if (!guest) {
+            return res.redirect('/rsvp/?missing=1');
+        }
 
-            email.sendRsvpLink(invitation, {
-                guest : guest,
-                resend: true
-            }, function (err) {
+        email.sendRsvpLink(invitation, {
+            guest : guest,
+            resend: true
+        }, function (err) {
                 if (err) { return next(err); }
 
-                req.session.resent = { sent: emailAddress };
-                res.redirect('/rsvp/');
-            });
+            res.redirect('/rsvp/');
         });
     });
 }
@@ -79,18 +76,14 @@ function rsvp(req, res) {
     if (afterWedding()) {
         return res.render('rsvp/after');
     }
+    console.log(invitation);
+    return res.render('rsvp/index', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp', invitation: invitation });
 
-    res.locals.resent = req.session.resent;
-    delete req.session.resent;
-
-    if (!invitation || !invitation.rsvpd) {
-        return res.render('rsvp/index', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp' });
-    }
-
+    console.log(invitation);
     if (invitation.attending) {
-        return res.render('rsvp/attending');
+        //return res.render('rsvp/attending');
     } else {
-        return res.render('rsvp/not-attending');
+        //return res.render('rsvp/not-attending');
     }
 }
 

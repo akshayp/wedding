@@ -7,7 +7,6 @@ module.exports = {
     session: {
         keys   : ['akshali.session'],
         secret: env.SESSION_SECRET,
-
         cookie: {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 1 week
         }
