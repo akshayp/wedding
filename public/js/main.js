@@ -43,3 +43,30 @@ function inViewport(el, cushion) {
 function getMargin(el) {
     return win.getComputedStyle(el).getPropertyValue('margin-top');
 }
+
+function toggleClass(element, className) {
+    var classes = element.className.split(/\s+/),
+        length = classes.length,
+        i = 0;
+
+    for (; i < length; i++) {
+        if (classes[i] === className) {
+            classes.splice(i, 1);
+            break;
+        }
+    }
+
+    if (length === classes.length) {
+        classes.push(className);
+    }
+
+    element.className = classes.join(' ');
+}
+
+var nav = doc.querySelectorAll('nav')[0],
+    menuLink = doc.querySelectorAll('.menu-link')[0];
+
+menuLink.onclick = function (e) {
+    e.preventDefault();
+    toggleClass(nav, 'show');
+};
