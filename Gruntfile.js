@@ -10,9 +10,10 @@ module.exports = function (grunt) {
         },
         vendor: {
             pure: 'http://yui.yahooapis.com/pure/0.5.0/pure-min.css',
+            puregrids: 'http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css',
             html5shiv: 'http://html5shiv.googlecode.com/svn/trunk/html5.js',
             mapbox: 'https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.js',
-            mapboxcss: 'https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.css'
+            mapboxcss: 'https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.css',
         },
         concat: {
             js: {
