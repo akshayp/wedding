@@ -48,6 +48,7 @@ hbs = exphbs.create({
 app.set('port', process.env.PORT || 3000);
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.disable('etag')
 
 if (env !== 'development') {
     app.use(middleware.error);
