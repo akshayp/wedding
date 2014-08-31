@@ -9,7 +9,7 @@
     }
 
     timelineblocks.forEach(function (node) {
-        if(!inViewport(node, 400)) {
+        if(!inViewport(node, 350)) {
             var hideEls = arrayify(node.querySelectorAll('.timeline-marker, .timeline-content'));
             hideEls.forEach(function (el) {
                 el.className += ' is-hidden';
