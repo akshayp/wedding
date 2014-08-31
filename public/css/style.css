@@ -561,7 +561,73 @@ and (max-width:960px) {
 and (min-device-width : 768px) 
 and (max-device-width : 1024px)
 and (orientation:portrait)  {
-    
+    header {
+        padding: 0 3%;
+    }
+
+    h1, nav {
+        font-size: 1.8rem;
+    }
+
+    h1 {
+        line-height: 3;
+    }
+
+    .banner {
+        height: 335px;
+    }
+
+    .banner img {
+        top: -100px;
+    }
+
+    .banner .hashtag {
+        font-size: 3rem;
+        top: 15%;
+        text-align: center;
+    }
+
+    .banner .hashtag i {
+        font-size: 3rem;
+    }
+    #timeline::after {
+        left: 5px;
+        top: -40px;
+    }
+    .map-m {
+        height: 265px;
+    }
+
+    .registry img {
+        top: 0;
+    }
+}
+
+/* Tablet Landscape overrides*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+     header {
+        padding: 0 5%;
+    }
+
+    .banner img {
+        top: -180px;
+    }
+
+    .banner {
+        height: 400px;
+    }
+
+    #timeline::after {
+        left: 5px;
+        top: -40px;
+    }
+
+    .registry img {
+        top: 0;
+    }
 }
 
 /* iPhone <5 */
