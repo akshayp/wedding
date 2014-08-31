@@ -88,9 +88,10 @@ nav li {
     display: none;
     background-color: #191818;
     background: linear-gradient(#4D4D4D, #2F2F2F);
-    padding: 0.5em 1em;
+    padding: 1em;
     width: 20px;
-    margin-top: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     float: right;
 }
 
@@ -596,14 +597,14 @@ and (max-device-width : 568px) {
     .menu-link { display: block; }
     nav { display: none; margin: 0; font-size: 1.5rem; width: 100%; }
     nav ul { margin: 0; padding: 0; }
-    nav li { display: block; margin: 5px 0; border-top: 1px solid #666; padding: 5px; }
-    h1 { font-size: 1.6rem; }
+    nav li { display: block; margin: 5px 0; border-top: 1px solid #666; padding: 10px; }
+    h1 { font-size: 1.8rem; }
     h2 { font-size: 1.5rem; }
     .banner { height: 140px; }
     .banner img { top: -50px; }
     .banner .hashtag { font-size: 2.5rem; }
     .banner .hashtag i { font-size: 1.2rem; }
-    h4 { font-size: 1.3rem; margin: 0.5em;}
+    h4 { font-size: 1.8rem; margin: 0.75em 0;}
     .registry { height: 120px; }
     .registry img { top: -10px; }
     .map-l { height: 200px; }
@@ -611,6 +612,7 @@ and (max-device-width : 568px) {
     .details dl { font-size: 1.4rem; margin-top: 10px; }
     .details dd { margin-left: 58px; }
     .round-l-img { height: 125px; }
+    .logistics h2 { margin: 1em 0; font-size: 1.8rem; }
 }
 
 /* iPhone Landscape overrides */
