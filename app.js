@@ -81,7 +81,7 @@ app.locals = {
         {id: 'wedding',   url: '/wedding/',   label: 'Wedding'},
         {id: 'logistics', url: '/logistics/', label: 'Logistics'},
         {id: 'registry',  url: '/registry/',  label: 'Registry'},
-        {id: 'rsvp',      url: '/rsvp/',      label: 'RSVP'}
+        //{id: 'rsvp',      url: '/rsvp/',      label: 'RSVP'}
     ]
 
 };
@@ -92,14 +92,14 @@ app.get('/', routes.index);
 app.get('/wedding/', routes.wedding);
 app.get('/logistics/', routes.logistics);
 app.get('/registry/', routes.registry);
-app.get('/rsvp/', routes.rsvp.index);
+/*app.get('/rsvp/', routes.rsvp.index);
 app.post('/rsvp/', routes.rsvp.resend);
 app.get('/rsvp/:invitationkey', routes.rsvp.login);
 
 app.all('/api/invitations/:invitation/*', middleware.auth);
 app.get('/api/invitations/:invitation/', routes.invitations.read);
 app.put('/api/invitations/:invitation/', routes.invitations.update);
-app.post('/api/invitations/:invitation/confirm', routes.invitations.confirm);
+app.post('/api/invitations/:invitation/confirm', routes.invitations.confirm);*/
 app.get('/combo/:version', combo.combine({ rootPath: 'public' }), combo.respond);
 
 
