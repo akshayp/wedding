@@ -13,6 +13,11 @@
             .setView([mapNode.getAttribute('data-lat') || 37.5566, mapNode.getAttribute('data-long') || -122.3005],mapNode.getAttribute('data-zoom') || 11);
 
             map.scrollWheelZoom.disable();
+            map.dragging.disable();
+            map.touchZoom.disable();
+            if (map.tap) {
+                map.tap.disable();
+            }
 
             map.featureLayer.on('ready', function() {
                 this.eachLayer(function(marker) { 
