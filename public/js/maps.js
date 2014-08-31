@@ -14,7 +14,7 @@
 
             map.scrollWheelZoom.disable();
 
-            map.featureLayer.on('ready', function(e) {
+            map.featureLayer.on('ready', function() {
                 this.eachLayer(function(marker) { 
                     marker.openPopup();
                 });
