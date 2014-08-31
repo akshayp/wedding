@@ -6,7 +6,7 @@ html {
 
 html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
-    font-family: "Quantico", sans-serif;
+    font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 }
 
 body {
@@ -73,11 +73,25 @@ nav {
     margin: 0.47em 0 0;
 }
 
+nav ul {
+    margin: 0.85em 0;
+}
+
 nav li {
     display: inline-block;
     margin-left: 30px;
     font-weight: bold;
     list-style: none;
+}
+
+.menu-link {
+    display: none;
+    background-color: #191818;
+    background: linear-gradient(#4D4D4D, #2F2F2F);
+    padding: 0.5em 1em;
+    width: 20px;
+    margin-top: 8px;
+    float: right;
 }
 
 .right {
@@ -104,10 +118,9 @@ nav li {
 
 .round-l-img {
     border-radius: 50%;
-    border: 10px solid #FFF;
-    width: 350px;
-    height: 350px;
-    margin: 10px;
+    border: 5px solid #FFF;
+    max-height: 350px;
+    margin: 10px 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -131,6 +144,10 @@ nav li {
     height: 250px;
 }
 
+.accent {
+    border-top: 1px solid #DDD;
+}
+
 .shake {
   -webkit-animation-name: shake;
   -webkit-animation-duration: 10s;
@@ -146,6 +163,10 @@ nav li {
     position: relative;
 }
 
+.show {
+    display: block;
+}
+
 .banner img {
     position: absolute;
     top: -250px;
@@ -157,7 +178,7 @@ nav li {
     top: 30%;
     font-size: 10rem;
     right: 10%;
-    line-height: 6rem;
+    line-height: 0.7;
     color: #00686B;
 }
 
@@ -203,6 +224,10 @@ a.donate-now {
 
 /* End Util Classes */
 
+.us {
+    margin-bottom: 20px;
+}
+
 .registry {
     height: 335px;
 }
@@ -214,8 +239,7 @@ a.donate-now {
 .details dl {
     font-size: 2rem;
     text-align: left;
-    width: 66%;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .details dd {
@@ -332,8 +356,8 @@ a.donate-now {
     display: table;
     clear: both;
     position: absolute;
-    top: -45px;
-    left: 0%;
+    top: -40px;
+    left: 5px;
     font-size: 4rem;
     height: 100%;
     color: #F07677;
@@ -353,16 +377,6 @@ a.donate-now {
     top: 10px;
 }
 
-@media only screen and (min-width: 1170px) {
-    #timeline::before {
-        left: 50%;
-        margin-left: -2px;
-    }
-    #timeline::after {
-        left: 48.3%;
-    }
-}
-
 .timeline-marker {
     display: block;
     width: 24px;
@@ -376,25 +390,6 @@ a.donate-now {
     background-color: #FFF;
     border: 3px solid #F07677;
     border-radius: 50%;
-}
-
-@media only screen and (min-width: 1170px) {
-    .timeline-marker {
-        left: 50%;
-        margin-left: -15px;
-        -webkit-transform: translateZ(0);
-        -webkit-backface-visibility: hidden;
-    }
-    
-    .timeline-marker.is-hidden {
-        visibility: hidden;
-    }
-    
-    .timeline-marker.bounce-in {
-        visibility: visible;
-        -webkit-animation: bounce-in 0.6s;
-        animation: bounce-in 0.6s;
-    }
 }
 
 .timeline-block {
@@ -460,17 +455,28 @@ a.donate-now {
     margin-top: -10px;
 }
 
-@media only screen and (min-width: 768px) {
-    .timeline-content h3 {
-        font-size: 2.5rem;
-    }
-    .timeline-content p,
-    .timeline-content time {
-        font-size: 1.5rem;
-    }
-}
+/* Screens ≥ 1024px*/
+@media screen and (min-width: 64em) {
+    #timeline::before { left: 50%; margin-left: -2px; }
+    #timeline::after { left: 48.556%; top: -42px; }
 
-@media only screen and (min-width: 1170px) {
+    .timeline-marker {
+        left: 50%;
+        margin-left: -15px;
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+    }
+    
+    .timeline-marker.is-hidden {
+        visibility: hidden;
+    }
+    
+    .timeline-marker.bounce-in {
+        visibility: visible;
+        -webkit-animation: bounce-in 0.6s;
+        animation: bounce-in 0.6s;
+    }
+
     .timeline-content {
         margin-left: 0;
         padding: 1.6em;
@@ -540,20 +546,18 @@ a.donate-now {
         -webkit-animation: bounce 0.6s;
         animation: bounce 0.6s;
     }
-}
-
-@media only screen and (min-width: 1170px) {
     .timeline-block:nth-child(odd) .timeline-content.bounce-in {
         -webkit-animation: bounce-inverse 0.6s;
         animation: bounce-inverse 0.6s;
     }
 }
 
-/* Responsive Stuff */
-
-@media only screen
-and (max-width:960px) {
-    
+/* Screens ≥ 768px */
+@media screen and (min-width: 48em) {
+    .accent { border: none; border-left: 1px solid #DDD; }
+    .timeline-content h3 { font-size: 2.5rem; }
+    .timeline-content p,
+    .timeline-content time { font-size: 1.5rem; }
 }
 
 /*Tablet Portrait Overrides*/
@@ -561,46 +565,18 @@ and (max-width:960px) {
 and (min-device-width : 768px) 
 and (max-device-width : 1024px)
 and (orientation:portrait)  {
-    header {
-        padding: 0 3%;
-    }
-
-    h1, nav {
-        font-size: 1.8rem;
-    }
-
-    h1 {
-        line-height: 3;
-    }
-
-    .banner {
-        height: 335px;
-    }
-
-    .banner img {
-        top: -100px;
-    }
-
+    header { padding: 0 3%; }
+    h1, nav { font-size: 1.8rem; }
+    h1 { line-height: 3; }
+    .banner { height: 335px; }
+    .banner img { top: -100px; }
     .banner .hashtag {
         font-size: 3rem;
         top: 15%;
-        text-align: center;
     }
-
-    .banner .hashtag i {
-        font-size: 3rem;
-    }
-    #timeline::after {
-        left: 5px;
-        top: -40px;
-    }
-    .map-m {
-        height: 265px;
-    }
-
-    .registry img {
-        top: 0;
-    }
+    .banner .hashtag i { font-size: 3rem; }
+    .map-m { height: 265px; }
+    .registry img { top: 0; }
 }
 
 /* Tablet Landscape overrides*/
@@ -608,49 +584,53 @@ and (orientation:portrait)  {
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
 and (orientation : landscape) {
-     header {
-        padding: 0 5%;
-    }
-
-    .banner img {
-        top: -180px;
-    }
-
-    .banner {
-        height: 400px;
-    }
-
-    #timeline::after {
-        left: 5px;
-        top: -40px;
-    }
-
-    .registry img {
-        top: 0;
-    }
+    header { padding: 0 5%; }
+    .banner img { top: -180px; }
+    .banner { height: 400px; }
+    .registry img { top: 0; }
 }
 
-/* iPhone <5 */
+/* iPhone */
 @media only screen
 and (min-device-width : 320px)
-and (max-device-width : 480px) {
-    
+and (max-device-width : 568px) {
+    header { padding: 0 1% 0 5%; }
+    .menu-link { display: block; }
+    nav { display: none; margin: 0; font-size: 1.5rem; width: 100%; }
+    nav ul { margin: 0; padding: 0; }
+    nav li { display: block; margin: 5px 0; border-top: 1px solid #666; padding: 5px; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.5rem; }
+    .banner { height: 140px; }
+    .banner img { top: -50px; }
+    .banner .hashtag { font-size: 2.5rem; }
+    .banner .hashtag i { font-size: 1.2rem; }
+    h4 { font-size: 1.3rem; margin: 0.5em;}
+    .registry { height: 120px; }
+    .registry img { top: -10px; }
+    .map-l { height: 200px; }
+    .details { padding: 10px 20px; }
+    .details dl { font-size: 1.4rem; margin-top: 10px; }
+    .details dd { margin-left: 58px; }
+    .round-l-img { height: 125px; }
 }
 
-/* iPhone <5 Landscape overrides */
+/* iPhone Landscape overrides */
 @media only screen
 and (min-device-width : 320px)
-and (max-device-width : 480px)
+and (max-device-width : 568px)
 and (orientation:landscape) {
-
+    .registry { height: 170px; }
+    .banner { height: 250px; }
+    .banner img { top: -100px; }
 }
 
-/* iPhone >5 */
+/* iPhone >5 overrides */
 @media only screen
 and (min-device-width: 320px)
 and (max-device-width: 568px)
 and (-webkit-device-pixel-ratio: 2)
 and (device-aspect-ratio: 40/71)
 and (orientation:portrait) {
-    
+
 }
