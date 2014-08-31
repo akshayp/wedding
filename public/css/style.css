@@ -358,7 +358,7 @@ a.donate-now {
     position: absolute;
     top: -40px;
     left: 5px;
-    font-size: 4rem;
+    font-size: 40px;
     height: 100%;
     color: #F07677;
 }
@@ -458,7 +458,7 @@ a.donate-now {
 /* Screens ≥ 1024px*/
 @media screen and (min-width: 64em) {
     #timeline::before { left: 50%; margin-left: -2px; }
-    #timeline::after { left: 48.556%; top: -42px; }
+    #timeline::after { left: 50%; top: -42px; margin-left: -17px; }
 
     .timeline-marker {
         left: 50%;
@@ -570,10 +570,7 @@ and (orientation:portrait)  {
     h1 { line-height: 3; }
     .banner { height: 335px; }
     .banner img { top: -100px; }
-    .banner .hashtag {
-        font-size: 3rem;
-        top: 15%;
-    }
+    .banner .hashtag { font-size: 5rem; }
     .banner .hashtag i { font-size: 3rem; }
     .map-m { height: 265px; }
     .registry img { top: 0; }
@@ -584,6 +581,7 @@ and (orientation:portrait)  {
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
 and (orientation : landscape) {
+    #timeline::after { margin-left: -15px; }
     header { padding: 0 5%; }
     .banner img { top: -180px; }
     .banner { height: 400px; }
