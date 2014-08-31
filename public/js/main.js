@@ -14,15 +14,15 @@ function hasClass(el, cls) {
 }
 
 function viewportW() {
-    var a = docEl['clientWidth'],
-        b = win['innerWidth'];
+    var a = docEl.clientWidth,
+        b = win.innerWidth;
 
     return a < b ? b : a;
 }
 
 function viewportH() {
-    var a = docEl['clientHeight'],
-        b = win['innerHeight'];
+    var a = docEl.clientHeight,
+        b = win.innerHeight;
 
     return a < b ? b : a;
 }
@@ -30,8 +30,8 @@ function viewportH() {
 function calibrate(coords, cushion) {
     var o = {};
     cushion = +cushion || 0;
-    o['width'] = (o['right'] = coords['right'] + cushion) - (o['left'] = coords['left'] - cushion);
-    o['height'] = (o['bottom'] = coords['bottom'] + cushion) - (o['top'] = coords['top'] - cushion);
+    o.width = (o.right = coords.right + cushion) - (o.left = coords.left - cushion);
+    o.height = (o.bottom = coords.bottom + cushion) - (o.top = coords.top - cushion);
     return o;
   }
 
@@ -41,5 +41,5 @@ function inViewport(el, cushion) {
 }
 
 function getMargin(el) {
-    return getComputedStyle(el).getPropertyValue("margin-top");
+    return win.getComputedStyle(el).getPropertyValue('margin-top');
 }

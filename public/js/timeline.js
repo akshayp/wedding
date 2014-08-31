@@ -1,4 +1,4 @@
-/*globals window, document, arrayify, hasClass*/
+/*globals window, document, arrayify, hasClass, getMargin, inViewport*/
 (function (window, document) {
 
     var didScroll = false;
@@ -9,8 +9,6 @@
     }
 
     timelineblocks.forEach(function (node) {
-        var cushion = getMargin(node);
-
         if(!inViewport(node, 400)) {
             var hideEls = arrayify(node.querySelectorAll('.timeline-marker, .timeline-content'));
             hideEls.forEach(function (el) {
