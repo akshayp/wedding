@@ -17,11 +17,11 @@ body {
 
 a {
     color: #00E;
+    text-decoration: none;
 }
 
 h1 {
     text-transform: uppercase;
-    display: inline-block;
 }
 
 h2 {
@@ -46,19 +46,21 @@ p {
     font-size: 1.5rem;
 }
 
+.Ta-c { text-align: center; }
+.Ta-l { text-align: left; }
+.P-15 { padding: 15px; }
+.Fw-b { font-weight: bold; }
+.Td-u { text-decoration: underline; }
+.D-b { display: block; }
+.D-ib { display: inline-block; }
+.Fl-r { float: right; }
+.Fl-l { float: left; }
+.Px-10 { padding-left: 10px; padding-right: 10px; }
+
 header {
     background: #000;
     overflow: hidden;    
     padding: 0 6% 0 18%;
-}
-
-header > a {
-    float: left;
-    display: inline-block;
-}
-
-header a {
-    text-decoration: none;
 }
 
 header a:hover,
@@ -80,8 +82,6 @@ nav ul {
 nav li {
     display: inline-block;
     margin-left: 30px;
-    font-weight: bold;
-    list-style: none;
 }
 
 .menu-link {
@@ -92,19 +92,6 @@ nav li {
     width: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
-    float: right;
-}
-
-.right {
-    float: right;
-}
-
-.Ta-c {
-    text-align: center;
-}
-
-.Ta-l {
-    text-align: left;
 }
 
 .cf:before,
@@ -145,27 +132,38 @@ nav li {
     height: 250px;
 }
 
+.details {
+    color: #222;
+    padding: 30px 20px;
+}
+
 .accent {
     border-top: 1px solid #DDD;
 }
 
+.LightText,
+.LightText a {
+    color: #FFF;
+}
+
+.Mw-800 {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .shake {
-  -webkit-animation-name: shake;
-  -webkit-animation-duration: 10s;
-  -webkit-animation-iteration-count: infinite;
-  animation-name: shake;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
+    -webkit-animation-name: shake;
+    -webkit-animation-duration: 10s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: shake;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
 }
 
 .banner {
     height: 535px;
     overflow: hidden;
     position: relative;
-}
-
-.show {
-    display: block;
 }
 
 .banner img {
@@ -183,44 +181,48 @@ nav li {
     color: #00686B;
 }
 
-.banner .hashtag time {
-    display: block;
-}
-
 .banner .hashtag i {
     font-size: 4rem;
 }
 
 a.donate-now {
     color: #FFF;
-    font-family: "Proxima-Nova-n6","Proxima-Nova-1","Proxima-Nova-2","Proxima Nova",sans-serif;
     background: #59C77F;
     padding: 1em 2em;
     border-radius: 5px;
     letter-spacing: .05em;
     text-transform: uppercase;
-    display: inline-block;
-    text-decoration: none;
     margin-top: 1em;
 }
 
 .charitywater img {
-    display: inline-block;
     height: 40px;
 }
 
-.details {
-    color: #222;
-    padding: 30px 20px;
+.alert {
+    background-color: rgb(209, 235, 238);
+    color: rgb(102, 131, 145);
+    position: relative;
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 3px;
+    border: 1px solid;
 }
 
-.LightText,
-.LightText a {
-    color: #FFF;
+.alert-error {
+    background-color: #D13C38;
+    color: #fff;
 }
 
-.P-15 {
-    padding: 15px;
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.alert-success {
+    background-color: rgb(83, 180, 79);
+    color: #fff;
 }
 
 /* End Util Classes */
@@ -248,20 +250,7 @@ a.donate-now {
 }
 
 .details dt {
-    float: left;
     margin-right: 10px;
-    font-weight: bold;
-}
-
-.details p,
-.Mw-800 {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.to-do .info,
-.to-eat .info {
-    padding: 0 10px;
 }
 
 .logistics .to-do p,
@@ -275,22 +264,13 @@ a.donate-now {
     margin: 0 auto;
 }
 
-.rsvp {
-    margin-top: 20px;
-}
-
-.rsvp h3 {
-    text-align: center;
-}
-
 .rsvp form {
     font-size: 2rem;
 }
 
 .pure-form-aligned .pure-control-group .input-wide {
-    width: 20em;
+    width: 100%;
     text-align: left;
-    display: block;
     margin-bottom: 10px;
 }
 
@@ -315,22 +295,9 @@ a.donate-now {
     margin-bottom: 10px;
 }
 
-.details a {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.ceremony {
-    background: #000;
-}
-
-.cocktails {
-    background: #1F8DD6;
-}
-
-.reception {
-    background: #2D3E50;
-}
+.ceremony { background: #000; }
+.cocktails { background: #1F8DD6; }
+.reception { background: #2D3E50; }
 
 #timeline {
     position: relative;
@@ -519,21 +486,10 @@ a.donate-now {
         float: right;
     }
 
-    .Neg-25 {
-        margin-top: -25%;
-    }
-    
-    .Neg-30 {
-        margin-top: -30%;
-    }
-
-    .Neg-40 {
-        margin-top: -40%;
-    }
-  
-    .Neg-60 {
-        margin-top: -60%;
-    }
+    .Neg-25 { margin-top: -25%; }
+    .Neg-30 { margin-top: -30%; }
+    .Neg-40 { margin-top: -40%; }
+    .Neg-60 { margin-top: -60%; }
 
     .timeline-block:nth-child(odd) .timeline-content time {
         text-align: right;
@@ -589,15 +545,16 @@ and (orientation : landscape) {
     .registry img { top: 0; }
 }
 
-/* iPhone */
+/* iPhoneish */
 @media only screen
-and (min-device-width : 320px)
-and (max-device-width : 568px) {
+and (min-width : 320px)
+and (max-width : 568px) {
     header { padding: 0 1% 0 5%; }
     .menu-link { display: block; }
     nav { display: none; margin: 0; font-size: 1.5rem; width: 100%; }
     nav ul { margin: 0; padding: 0; }
-    nav li { display: block; margin: 5px 0; border-top: 1px solid #666; padding: 10px; }
+    nav li { display: block; margin: 5px 0; border-top: 1px solid #666;  }
+    nav li a { padding: 10px; }
     h1 { font-size: 1.8rem; }
     h2 { font-size: 1.5rem; }
     .banner { height: 140px; }
@@ -623,14 +580,4 @@ and (orientation:landscape) {
     .registry { height: 170px; }
     .banner { height: 250px; }
     .banner img { top: -100px; }
-}
-
-/* iPhone >5 overrides */
-@media only screen
-and (min-device-width: 320px)
-and (max-device-width: 568px)
-and (-webkit-device-pixel-ratio: 2)
-and (device-aspect-ratio: 40/71)
-and (orientation:portrait) {
-
 }

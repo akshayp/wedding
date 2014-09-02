@@ -10,15 +10,15 @@
 </head>
 <body>
     <header class="LightText">
-        <a href="/"><h1>Vaishali + Akshay</h1></a>
-        <a href="#menu" class="menu-link">
+        <a class="D-ib Fl-l" href="/"><h1 class="D-ib">Vaishali + Akshay</h1></a>
+        <a href="#menu" class="menu-link Fl-r">
             <img width="20" title="" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAYAQAAAAC6w2LjAAAAAnRSTlMAAHaTzTgAAAAXSURBVHgBY/zPwMDwEQvJAAL4SVroBQCTQhdZIO+EIAAAAABJRU5ErkJggg==" alt="Menu toggle" class="pure-img"/>
         </a>
         <nav>
             <ul>
                 {{#each nav}}
-                <li class="{{#eq id compare=../active}}active{{/eq}}">
-                    <a href="{{url}}"><b>{{label}}</b></a>
+                <li class="Fw-b {{#eq id compare=../active}}active{{/eq}}">
+                    <a class="D-b" href="{{url}}">{{label}}</a>
                 </li>
                 {{/each}}
             </ul>
@@ -28,6 +28,7 @@
         {{{body}}}
     </div>
 <script async src="/combo/{{version}}/?js/vendor.js&js/main.js&js/timeline.js&js/maps.js"></script>
+<script>window.csrfToken = '{{csrf}}';</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
