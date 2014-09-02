@@ -41,14 +41,28 @@ hbs = exphbs.create({
                 return options.fn(this);
             }
             return options.inverse(this);
-        }
+        },
+        and: function (a, b, options) {
+            if (a && b) {
+                return options.fn(this);
+            } else {
+                return options.inverse(this);
+            }
+        },
+        is: function (value, test, options) {
+            if (value === test) {
+                return options.fn(this);
+            } else {
+                return options.inverse(this);
+            }
+        },
     }
 });
 
 app.set('port', process.env.PORT || 3000);
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.disable('etag')
+app.disable('etag');
 
 if (env !== 'development') {
     app.use(middleware.error);
@@ -94,7 +108,8 @@ app.get('/wedding/', routes.wedding);
 app.get('/logistics/', routes.logistics);
 app.get('/registry/', routes.registry);
 /*app.get('/rsvp/', routes.rsvp.index);
-app.post('/rsvp/', routes.rsvp.resend);
+app.post('/rsvp/', routes.rsvp.submit);
+app.post('/rsvp/resend', routes.rsvp.resend);
 app.get('/rsvp/:invitationkey', routes.rsvp.login);
 
 app.all('/api/invitations/:invitation/*', middleware.auth);
