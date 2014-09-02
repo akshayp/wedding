@@ -137,7 +137,7 @@ menuLink.addEventListener('click', function(e) {
 });
 
 if (form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submita', function(e) {
         e.preventDefault();
         var formData = formify(this);
 
