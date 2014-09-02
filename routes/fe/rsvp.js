@@ -7,8 +7,7 @@ function afterWedding () {
     return Date.now() > config.date;
 }
 
-function resend(req, res, next) {
-    console.log(req.body);
+function submit(req, res, next) {
 
     var emailAddress = req.body.email.trim();
 
@@ -17,7 +16,12 @@ function resend(req, res, next) {
     }
 
     if (!emailAddress) {
-        return res.redirect('/rsvp/?email=0');
+        return res.render('rsvp', {
+            title: 'Akshali\'s Wedding RSVP',
+            active: 'rsvp',
+            message: 'Provide a valid email address',
+            type: 'error'
+        });
     }
 
     guests.loadGuestByEmail(emailAddress, function (err, guest) {
@@ -26,16 +30,52 @@ function resend(req, res, next) {
         }
 
         if (!guest) {
-            return res.redirect('/rsvp/?missing=1');
+            return res.render('rsvp', {
+                title: 'Akshali\'s Wedding RSVP',
+                active: 'rsvp',
+                message: 'We could not find you in our list. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
+                type: 'error'
+            });
+        }
+    });
+}
+
+function resend(req, res, next) {
+
+    var emailAddress = req.body.email.trim();
+
+    if (afterWedding()) {
+        return res.redirect('/rsvp/');
+    }
+
+    if (!emailAddress) {
+        return res.render('rsvp', {
+            title: 'Akshali\'s Wedding RSVP',
+            active: 'rsvp',
+            message: 'Provide a valid email address',
+            type: 'error'
+        });
+    }
+
+    guests.loadGuestByEmail(emailAddress, function (err, guest) {
+        if (err || !guest) {
+            return res.render('rsvp', {
+                title: 'Akshali\'s Wedding RSVP',
+                active: 'rsvp',
+                message: 'We could not find you in our list. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
+                type: 'error'
+            });
         }
 
-        email.sendRsvpLink(invitation, {
-            guest : guest,
-            resend: true
-        }, function (err) {
+        email.sendRsvpLink(guest, function (err) {
                 if (err) { return next(err); }
 
-            res.redirect('/rsvp/');
+            return res.render('rsvp', {
+                title: 'Akshali\'s Wedding RSVP',
+                active: 'rsvp',
+                message: 'We have just emailed you your invitation link. Please click the link to login',
+                type: 'success'
+            });
         });
     });
 }
@@ -74,19 +114,13 @@ function rsvp(req, res) {
     var invitation = req.invitation;
 
     if (afterWedding()) {
-        return res.render('rsvp/after');
+        return res.render('after');
     }
-    console.log(invitation);
-    return res.render('rsvp/index', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp', invitation: invitation });
-
-    console.log(invitation);
-    if (invitation.attending) {
-        //return res.render('rsvp/attending');
-    } else {
-        //return res.render('rsvp/not-attending');
-    }
+    //console.log(invitation);
+    return res.render('rsvp', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp', invitation: invitation });
 }
 
-exports.resend = resend;
+exports.submit = submit;
+exports.resend  = resend;
 exports.login  = login;
 exports.index  = rsvp;
