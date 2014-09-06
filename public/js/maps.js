@@ -1,16 +1,19 @@
-/*globals document, arrayify, L*/
-(function (document) {
+/*globals $, L*/
+(function ($, L) {
 
-    var maps = arrayify(document.querySelectorAll('[data-map]'));
+    var maps = $('[data-map]');
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWtzaGF5cCIsImEiOiJ0ZGhBcVJVIn0.Dky1r5eel-SHJAq8UoLnuw';
 
     if(maps) {
-        maps.forEach(function (mapNode) {
-            var map = L.mapbox.map(mapNode.id, mapNode.getAttribute('data-map'), {
+
+        maps.each(function () {
+            var mapNode = $(this);
+
+            var map = L.mapbox.map(mapNode.attr('id'), mapNode.data('map'), {
                 zoomControl: false
             })
-            .setView([mapNode.getAttribute('data-lat') || 37.5566, mapNode.getAttribute('data-long') || -122.3005],mapNode.getAttribute('data-zoom') || 11);
+            .setView([mapNode.data('lat') || 37.5566, mapNode.data('long') || -122.3005], mapNode.data('zoom') || 11);
 
             map.scrollWheelZoom.disable();
             map.dragging.disable();
@@ -27,4 +30,4 @@
         });
     }
 
-}(document));
+}($, L));
