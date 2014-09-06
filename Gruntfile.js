@@ -6,7 +6,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            all: ['Gruntfile.js', '{conf,public,tasks,test}/**/*.js', 'app.js', 'index.js', '!public/vendor/**/*.js', '!public/js/vendor.js']
+            all: ['Gruntfile.js', '{config,lib,middleware,routes,scripts,public,tasks,test}/**/*.js', 'app.js', 'index.js', '!public/vendor/**/*.js', '!public/js/vendor.js']
         },
         vendor: {
             pure: 'http://yui.yahooapis.com/pure/0.5.0/pure-min.css',
