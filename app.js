@@ -15,7 +15,6 @@ var hbs, app, router,
     override    = require('method-override'),
     session     = require('cookie-session'),
     slash       = require('express-slash'),
-    state       = require('express-state'),
     express     = require('express'),
     config      = require('./config'),
     middleware  = require('./middleware'),
@@ -24,7 +23,6 @@ var hbs, app, router,
 /* ----- Config ----- */
 
 app = express();
-state.extend(app);
 
 app.enable('strict routing');
 
@@ -113,10 +111,6 @@ app.post('/rsvp/', routes.rsvp.submit);
 app.post('/rsvp/resend', routes.rsvp.resend);
 app.get('/rsvp/:invitationkey', routes.rsvp.login);
 
-app.all('/api/invitations/:invitation/*', middleware.auth);
-app.get('/api/invitations/:invitation/', routes.invitations.read);
-app.put('/api/invitations/:invitation/', routes.invitations.update);
-app.post('/api/invitations/:invitation/confirm', routes.invitations.confirm);
 app.get('/combo/:version', combo.combine({ rootPath: 'public' }), combo.respond);
 
 

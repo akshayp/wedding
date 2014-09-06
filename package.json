@@ -1,6 +1,6 @@
 {
     "name": "wedding",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "author": "Akshay Patel <akshayrpatel@gmail.com>",
     "private": true,
     "engines": {
@@ -21,7 +21,6 @@
         "colors": "0.x",
         "express": "4.x",
         "express-slash": "2.x",
-        "express-state": "1.2.x",
         "express3-handlebars": "0.5.0",
         "mailgun-js": "0.5.x",
         "method-override": "2.1.x",
