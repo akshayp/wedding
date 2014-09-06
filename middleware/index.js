@@ -2,5 +2,6 @@ module.exports = {
     auth      : require('./auth'),
     error     : require('./error'),
     csrfToken : require('./csrf'),
-    invitation: require('./invitation')
+    invitation: require('./invitation'),
+    pjax: require('./pjax'),
 };
