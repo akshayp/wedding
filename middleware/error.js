@@ -1,3 +1,5 @@
+/*jshint unused: false*/
+
 var BadRequest   = require('combohandler').BadRequest,
     STATUS_CODES = require('http').STATUS_CODES;
 
@@ -14,14 +16,6 @@ module.exports = function (err, req, res, next) {
     res.status(status).format({
         'html': function () {
             res.render('error', {status: message});
-        },
-
-        'json': function () {
-            res.json({status: message});
-        },
-
-        'text': function () {
-            res.send(message);
         }
     });
 };
