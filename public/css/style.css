@@ -20,10 +20,6 @@ a {
     text-decoration: none;
 }
 
-h1 {
-    text-transform: uppercase;
-}
-
 h2 {
     text-transform: uppercase;
     font-size: 4rem;
@@ -48,6 +44,7 @@ p {
 
 .Ta-c { text-align: center; }
 .Ta-l { text-align: left; }
+.Tt-u { text-transform: uppercase; }
 .P-15 { padding: 15px; }
 .Fw-b { font-weight: bold; }
 .Td-u { text-decoration: underline; }
@@ -56,11 +53,13 @@ p {
 .Fl-r { float: right; }
 .Fl-l { float: left; }
 .Px-10 { padding-left: 10px; padding-right: 10px; }
+.Py-10 { padding-top: 10px; padding-bottom: 10px; }
+.Mx-auto { margin: 0 auto; }
 
 header {
     background: #000;
     overflow: hidden;    
-    padding: 0 6% 0 18%;
+    padding: 0 3%;
 }
 
 header a:hover,
@@ -166,12 +165,6 @@ nav li {
     position: relative;
 }
 
-.banner img {
-    position: absolute;
-    top: -250px;
-    left: 0;
-}
-
 .banner .hashtag {
     position: absolute;
     top: 30%;
@@ -179,10 +172,11 @@ nav li {
     right: 10%;
     line-height: 0.7;
     color: #00686B;
+    width: 34%;
 }
 
 .banner .hashtag i {
-    font-size: 4rem;
+    font-size: 3.8rem;
 }
 
 a.donate-now {
@@ -191,7 +185,6 @@ a.donate-now {
     padding: 1em 2em;
     border-radius: 5px;
     letter-spacing: .05em;
-    text-transform: uppercase;
     margin-top: 1em;
 }
 
@@ -202,7 +195,6 @@ a.donate-now {
 .alert {
     background-color: rgb(209, 235, 238);
     color: rgb(102, 131, 145);
-    position: relative;
     margin-bottom: 1em;
     padding: 1em;
     border-radius: 3px;
@@ -231,12 +223,15 @@ a.donate-now {
     margin-bottom: 20px;
 }
 
+.gameover,
 .registry {
-    height: 335px;
+    background: transparent url(/img/gm.jpg) no-repeat 0 0;
+    background-size: 100% 100%;
 }
 
-.registry img {
-    top: -80px;
+.registry {
+    background-image: url(/img/gift.jpg);
+    height: 335px;
 }
 
 .details dl {
@@ -425,6 +420,8 @@ a.donate-now {
 
 /* Screens ≥ 1024px*/
 @media screen and (min-width: 64em) {
+    header { padding: 0 6% 0 16%; }
+
     #timeline::before { left: 50%; margin-left: -2px; }
     #timeline::after { left: 50%; top: -42px; margin-left: -17px; }
 
@@ -510,45 +507,40 @@ a.donate-now {
 }
 
 /* Screens ≥ 768px */
-@media screen and (min-width: 48em) {
+@media only screen 
+and (min-width: 48em) {
     .accent { border: none; border-left: 1px solid #DDD; }
     .timeline-content h3 { font-size: 2.5rem; }
     .timeline-content p,
     .timeline-content time { font-size: 1.5rem; }
 }
 
-/*Tablet Portrait Overrides*/
+/* Tablet */
 @media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px)
-and (orientation:portrait)  {
-    header { padding: 0 3%; }
-    h1, nav { font-size: 1.8rem; }
-    h1 { line-height: 3; }
-    .banner { height: 335px; }
-    .banner img { top: -100px; }
+and (min-width : 48em) 
+and (max-width : 64em) {
+    h1 { font-size: 2.2rem; }
+    nav { font-size: 1.6rem; }
+    .banner { height: 300px; }
+    .registry { height: 180px; }
     .banner .hashtag { font-size: 5rem; }
     .banner .hashtag i { font-size: 3rem; }
     .map-m { height: 265px; }
-    .registry img { top: 0; }
 }
 
 /* Tablet Landscape overrides*/
 @media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
+and (min-width : 48em) 
+and (max-width : 64em) 
 and (orientation : landscape) {
     #timeline::after { margin-left: -15px; }
-    header { padding: 0 5%; }
-    .banner img { top: -180px; }
     .banner { height: 400px; }
-    .registry img { top: 0; }
+    .registry { height: 240px; }
 }
 
-/* iPhoneish */
+/* Anything less than a Tablet Device */
 @media only screen
-and (min-width : 320px)
-and (max-width : 568px) {
+and (max-width : 47.938em) {
     header { padding: 0 1% 0 5%; }
     .menu-link { display: block; }
     nav { display: none; margin: 0; font-size: 1.5rem; width: 100%; }
@@ -558,26 +550,23 @@ and (max-width : 568px) {
     h1 { font-size: 1.8rem; }
     h2 { font-size: 1.5rem; }
     .banner { height: 140px; }
-    .banner img { top: -50px; }
-    .banner .hashtag { font-size: 2.5rem; }
-    .banner .hashtag i { font-size: 1.2rem; }
+    .banner .hashtag { font-size: 2.7rem; }
+    .banner .hashtag i { font-size: 2rem; }
     h4 { font-size: 1.8rem; margin: 0.75em 0;}
-    .registry { height: 120px; }
-    .registry img { top: -10px; }
+    .registry { height: 80px; }
     .map-l { height: 200px; }
     .details { padding: 10px 20px; }
     .details dl { font-size: 1.4rem; margin-top: 10px; }
     .details dd { margin-left: 58px; }
     .round-l-img { height: 125px; }
-    .logistics h2 { margin: 1em 0; font-size: 1.8rem; }
+    .logistics h2, .rsvp h2 { margin: 1em 0; font-size: 1.8rem; }
+    .pure-form-aligned .pure-control-group label { text-align: left; }
 }
 
-/* iPhone Landscape overrides */
+/* Mobile Landscape overrides */
 @media only screen
-and (min-device-width : 320px)
-and (max-device-width : 568px)
+and (max-width : 47.938em)
 and (orientation:landscape) {
-    .registry { height: 170px; }
     .banner { height: 250px; }
-    .banner img { top: -100px; }
+    .registry { height: 150px; }
 }
