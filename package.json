@@ -21,7 +21,7 @@
         "colors": "0.x",
         "express": "4.x",
         "express-slash": "2.x",
-        "express3-handlebars": "0.5.0",
+        "express-handlebars": "1.x",
         "mailgun-js": "0.5.x",
         "method-override": "2.1.x",
         "mongoose": "3.8.x",

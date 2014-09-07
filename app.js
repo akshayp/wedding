@@ -10,7 +10,7 @@ var hbs, app, router,
     compress    = require('compression'),
     cookie      = require('cookie-parser'),
     csrf        = require('csurf'),
-    exphbs      = require('express3-handlebars'),
+    exphbs      = require('express-handlebars'),
     logger      = require('morgan'),
     override    = require('method-override'),
     session     = require('cookie-session'),
@@ -34,26 +34,14 @@ router = express.Router({
 hbs = exphbs.create({
     defaultLayout: 'main',
     helpers: {
-        eq: function (context, options) {
-            if (context === options.hash.compare) {
-                return options.fn(this);
-            }
-            return options.inverse(this);
-        },
-        and: function (a, b, options) {
-            if (a && b) {
-                return options.fn(this);
-            } else {
-                return options.inverse(this);
-            }
-        },
         is: function (value, test, options) {
+
             if (value === test) {
                 return options.fn(this);
             } else {
                 return options.inverse(this);
             }
-        },
+        }
     }
 });
 
