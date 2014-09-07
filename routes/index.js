@@ -6,7 +6,5 @@ module.exports = {
     wedding: fe.wedding,
     logistics: fe.logistics,
     registry: fe.registry,
-    rsvp: require('./fe/rsvp'),
-    // API routes
-    invitations: require('./api/invitations')
+    rsvp: require('./fe/rsvp')
 };
