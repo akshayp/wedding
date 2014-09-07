@@ -3,23 +3,23 @@
     <fieldset>
         <div class="pure-control-group">
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Name(s)" required="1" class="pure-u-3-5" {{#with invitation}}value="{{name}}" readonly="true"{{/with}}>
+            <input id="name" name="name" type="text" placeholder="Name(s)" required="1" class="pure-u-1-1 pure-u-sm-3-5" {{#with invitation}}value="{{name}}" readonly="true"{{/with}}>
         </div>
 
         <div class="pure-control-group">
             <label for="email">Email Address</label>
-            <input id="email" name="email" type="email" placeholder="Email Address" class="pure-u-3-5" required="1" {{#with invitation}}value="{{email}}" readonly="true"{{/with}}>
+            <input id="email" name="email" type="email" placeholder="Email Address" class="pure-u-1-1 pure-u-sm-3-5" required="1" {{#with invitation}}value="{{email}}" readonly="true"{{/with}}>
         </div>
 
         <div class="pure-control-group">
             <label>RSVP</label>
-            <div class="pure-u-3-5">
-                <label for="option-two" class="pure-radio input-wide D-b">
-                    <input id="option-two" type="radio" name="rsvp" value="yes" required="1">
+            <div class="pure-u-1-1 pure-u-sm-3-5">
+                <label for="rsvpyes" class="pure-radio input-wide D-b">
+                    <input id="rsvpyes" type="radio" name="attending" value="true" required="1" {{#is invitation.attending true}}checked{{/is}}>
                     Happily accepts. Yeehaw
                 </label>
-                <label for="option-two" class="pure-radio input-wide D-b">
-                    <input id="option-two" type="radio" name="rsvp" value="no" required="1">
+                <label for="rsvpno" class="pure-radio input-wide D-b">
+                    <input id="rsvpno" type="radio" name="attending" value="false" required="1" {{#is invitation.attending false}}checked{{/is}}>
                     No thanks! We don't like you that much
                 </label>
             </div>
@@ -27,29 +27,29 @@
 
         <div class="pure-control-group">
             <label for="plusone">Plus One</label>
-            <input id="name" name="name" type="text" placeholder="Bringing a date? Leave us their name" class="pure-u-3-5">
+            <input id="plusone" name="plusone" type="text" placeholder="Bringing a date? Leave us their name" class="pure-u-1-1 pure-u-sm-3-5" {{#if invitation.plusone}}value="{{invitation.plusone}}"{{/if}}>
         </div>
 
         <div class="pure-control-group">
             <label>Events</label>
-            <div class="pure-u-3-5">
+            <div class="pure-u-1-1 pure-u-sm-3-5">
                 {{#if invitation.events.mehndi.invited}}
                 <label for="mehndi" class="pure-radio input-wide D-b">
-                    <input id="mehndi" type="checkbox" name="events" value="mehndi"> Mehndi
+                    <input id="mehndi" type="checkbox" name="mehndi" value="true" {{#is invitation.events.mehndi.attending true}}checked{{/is}}> Mehndi
                 </label>
                 {{/if}}
                 <label for="ceremony" class="pure-radio input-wide D-b">
-                    <input id="ceremony" type="checkbox" name="events" value="ceremony"> Ceremony
+                    <input id="ceremony" type="checkbox" name="ceremony" value="true" {{#is invitation.events.ceremony.attending true}}checked{{/is}}> Ceremony
                 </label>
                 <label for="reception" class="pure-radio input-wide D-b">
-                    <input id="reception" type="checkbox" name="events" value="reception"> Reception
+                    <input id="reception" type="checkbox" name="reception" value="true" {{#is invitation.events.reception.attending true}}checked{{/is}}> Reception
                 </label>
             </div>
         </div>
 
         <div class="pure-control-group">
             <label for="textarea">Notes</label>
-            <textarea id="textarea" name="notes" class="pure-u-3-5" rows="3" placeholder="Leave us some ♥..."></textarea>
+            <textarea id="textarea" name="notes" class="pure-u-1-1 pure-u-sm-3-5" rows="3" placeholder="Leave us some ♥...">{{invitation.notes}}</textarea>
         </div>
 
         <div class="pure-controls">

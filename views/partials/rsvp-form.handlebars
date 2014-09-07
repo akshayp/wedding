@@ -1,0 +1,9 @@
+<h2>RSVP for our wedding!</h2>
+{{#if message}}
+    <p class="Ta-c alert alert-{{type}}">{{{message}}}</p>
+{{/if}}
+{{#if invitation}}
+    {{> form}}
+{{else}}
+    {{> no-invite-form}}
+{{/if}}

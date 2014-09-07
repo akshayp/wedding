@@ -1,0 +1,12 @@
+<form class="pure-form pure-form-aligned Mw-800" action="/rsvp/resend" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrf}}"/>
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="email">Email Address</label>
+            <input id="email" name="email" type="email" placeholder="Email Address" class="pure-u-1-1 pure-u-sm-3-5" required="1">
+        </div>
+        <div class="pure-controls">
+            <button type="submit" class="pure-button pure-button-primary submit-wide">Submit</button>
+        </div>
+    </fieldset>
+</form>

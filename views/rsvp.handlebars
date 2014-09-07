@@ -1,35 +1,15 @@
 <div class="rsvp Px-10">
     {{#is invitation.attending true}}
-        {{> attending}}
+        {{#is editing true}}
+            {{> rsvp-form}}
+        {{else}}
+            {{> attending}}
+        {{/is}}
     {{else}}
         {{#is invitation.attending false}}
-            {{> not-attending}}
+            {{> notattending}}
         {{else}}
-            {{#if invitation}}
-                <h2>RSVP for our wedding!</h2>
-                {{> form}}
-            {{else}}
-            <div class="Mw-800">
-                <h2>RSVP for our wedding!</h2>
-                {{#if type}}
-                    <p class="Ta-c alert alert-{{type}}">{{{message}}}</p>
-                {{else}}
-                    <p class="Ta-c alert alert-warning">Looks like you got to this link without going to the link we emailed you first. To proceed enter your email address below so you can get the invitation key to RSVP</p>
-                {{/if}}
-                <form class="pure-form pure-form-aligned" action="/rsvp/resend" method="POST">
-                    <input type="hidden" name="_csrf" value="{{csrf}}"/>
-                    <fieldset>
-                        <div class="pure-control-group">
-                            <label for="email">Email Address</label>
-                            <input id="email" name="email" type="email" placeholder="Email Address" class="pure-u-3-5" required="1">
-                        </div>
-                        <div class="pure-controls">
-                            <button type="submit" class="pure-button pure-button-primary submit-wide">Submit</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            {{/if}}
+            {{> rsvp-form}}
         {{/is}}
     {{/is}}    
 </div>

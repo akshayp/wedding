@@ -17,7 +17,7 @@
         <nav>
             <ul>
                 {{#each nav}}
-                <li class="Fw-b {{#eq id compare=../active}}active{{/eq}}">
+                <li class="Fw-b {{#is id ../active}}active{{/is}}">
                     <a class="D-b" href="{{url}}">{{label}}</a>
                 </li>
                 {{/each}}
