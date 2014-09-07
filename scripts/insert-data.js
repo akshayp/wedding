@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-
+/*jshint unused: false*/
 var colors = require('colors'),
     guests  = require('../lib/guests'),
-    Guest  = require('../lib/guest');
+    Guest  = require('../lib/schema');
 
-        Guest.find(function (err, guests) {
-            console.dir(guests);
-        });
+Guest.find(function (err, guests) {
+    console.dir(guests);
+});
 
 function importData() {
     var oGuest = new Guest({ firstName: 'Akshay', lastName: 'Patel', email: 'foo@foo.com', plusone: false });
@@ -23,10 +23,7 @@ function importData() {
         Guest.find(function (err, guests) {
             console.dir(guests);
         });
-
-        callback(null);
     });
-
 }
 
 

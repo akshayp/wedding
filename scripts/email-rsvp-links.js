@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+/*jshint unused: false*/
 var async = require('async'),
     colors = require('colors'),
     email = require('../lib/email'),
