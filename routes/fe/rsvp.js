@@ -1,42 +1,93 @@
 var path  = require('path'),
     config = require('../../config'),
     email = require('../../lib/email'),
-    guests       = require('../../lib/guests');
+    guests = require('../../lib/guests'),
+    TITLE = 'Akshali\'s Wedding RSVP',
+    ACTIVE = 'rsvp',
+    NOT_IN_LIST = 'We could not find you in our list. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
+    NO_EMAIL = 'Provide a valid email address.',
+    BOO_BOO = 'Something bad happened here :( Please hit submit again to retry',
+    EMAIL_CONFIRMATION = 'We have sent you an email confirmation that we recieved your RSVP. Thanks for stopping by!',
+    NO_RSVP = 'You forgot to pick an RSVP status to save.',
+    TOO_MANY_EMAILS = 'We have sent you a confirmation more than 3 times. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
+    SUCCESS = 'We have emailed you the invitation link. Please click the link in your email to start the RSVP process.',
+    WARNING = 'Looks like you got to this link without going to the link we emailed you first. To proceed enter your email address below so you can get the invitation key to RSVP.',
+    UNAUTHORIZED = 'Unauthorized request. Looks like you\'re trying to access a link that\'s invalid. Please use the link in your email or enter your email below.';
+
+
+function stringToBool(val) {
+    val = val || '';
+    return (val + '').toLowerCase() === 'true';
+}
 
 function afterWedding () {
     return Date.now() > config.date;
 }
 
 function submit(req, res, next) {
-
-    var emailAddress = req.body.email.trim();
+    var invitation = req.invitation,
+        attending = stringToBool(req.body.attending),
+        plusone = req.body.plusone || '',
+        notes = req.body.notes || '',
+        mehndi = stringToBool(req.body.mehndi) || false,
+        ceremony = stringToBool(req.body.ceremony) || false,
+        reception = stringToBool(req.body.reception) || false;
 
     if (afterWedding()) {
         return res.redirect('/rsvp/');
     }
 
-    if (!emailAddress) {
+    if (!invitation) {
         return res.render('rsvp', {
-            title: 'Akshali\'s Wedding RSVP',
-            active: 'rsvp',
-            message: 'Provide a valid email address',
+            title: TITLE,
+            active: ACTIVE,
+            message: NO_RSVP,
             type: 'error'
         });
     }
 
-    guests.loadGuestByEmail(emailAddress, function (err, guest) {
-        if (err) { 
-            return next(err); 
+    guests.updateGuest(invitation.id, {
+        attending: attending,
+        plusone: plusone,
+        notes: notes,
+        events: {
+            mehndi: {
+                invited: invitation.events.mehndi.invited,
+                attending: mehndi
+            },
+            ceremony: {
+                invited: invitation.events.ceremony.invited,
+                attending: ceremony
+            },
+            reception: {
+                invited: invitation.events.reception.invited,
+                attending: reception
+            }
         }
+    }, function (err, changedinvitation) {
 
-        if (!guest) {
+        if (err || !changedinvitation) {
+            console.log(err);
             return res.render('rsvp', {
-                title: 'Akshali\'s Wedding RSVP',
-                active: 'rsvp',
-                message: 'We could not find you in our list. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
+                title: TITLE,
+                active: ACTIVE,
+                message: BOO_BOO,
                 type: 'error'
             });
         }
+
+        res.locals.invitation = changedinvitation;
+
+        email.sendConfirm(changedinvitation, function (err) {
+            if (err) { return next(err); }
+
+            return res.render('rsvp', {
+                title: TITLE,
+                active: ACTIVE,
+                message: EMAIL_CONFIRMATION,
+                type: 'success'
+            });
+        });
     });
 }
 
@@ -50,9 +101,9 @@ function resend(req, res, next) {
 
     if (!emailAddress) {
         return res.render('rsvp', {
-            title: 'Akshali\'s Wedding RSVP',
-            active: 'rsvp',
-            message: 'Provide a valid email address',
+            title: TITLE,
+            active: ACTIVE,
+            message: NO_EMAIL,
             type: 'error'
         });
     }
@@ -60,21 +111,34 @@ function resend(req, res, next) {
     guests.loadGuestByEmail(emailAddress, function (err, guest) {
         if (err || !guest) {
             return res.render('rsvp', {
-                title: 'Akshali\'s Wedding RSVP',
-                active: 'rsvp',
-                message: 'We could not find you in our list. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
+                title: TITLE,
+                active: ACTIVE,
+                message: NOT_IN_LIST,
+                type: 'error'
+            });
+        }
+
+        if (guest.numEmails && (guest.numEmails > 3)) {
+            return res.render('rsvp', {
+                title: TITLE,
+                active: ACTIVE,
+                message: TOO_MANY_EMAILS,
                 type: 'error'
             });
         }
 
         email.sendRsvpLink(guest, function (err) {
-                if (err) { return next(err); }
+            if (err) { return next(err); }
 
-            return res.render('rsvp', {
-                title: 'Akshali\'s Wedding RSVP',
-                active: 'rsvp',
-                message: 'We have just emailed you your invitation link. Please click the link to login',
-                type: 'success'
+            var numEmails = guest.numEmails;
+
+            guests.updateGuest(guest.id, { numEmails: numEmails + 1 }, function() {
+                return res.render('rsvp', {
+                    title: TITLE,
+                    active: ACTIVE,
+                    message: SUCCESS,
+                    type: 'success'
+                });
             });
         });
     });
@@ -92,9 +156,13 @@ function login(req, res, next) {
         id = email.decipherId(req.params.invitationkey);
     } catch (e) {
         delete req.session.invitation;
-        var err = new Error('Unauthorized request.');
-        err.status = 401;
-        return next(err);
+
+        return res.render('rsvp', {
+            title: TITLE,
+            active: ACTIVE,
+            message: UNAUTHORIZED,
+            type: 'error'
+        });
     }
 
     guests.loadGuest(id, function (err, guest) {
@@ -111,13 +179,23 @@ function login(req, res, next) {
 
 
 function rsvp(req, res) {
-    var invitation = req.invitation;
+    var invitation = req.invitation,
+        message = invitation ? '' : WARNING;
 
     if (afterWedding()) {
         return res.render('after');
     }
-    //console.log(invitation);
-    return res.render('rsvp', { title: 'Akshali\'s Wedding RSVP', active: 'rsvp', invitation: invitation });
+
+    if (req.query.edit === '1') {
+        res.locals.editing = true;
+    }
+
+    return res.render('rsvp', { 
+        title: TITLE,
+        active: ACTIVE,
+        message: message,
+        type: 'warning'
+    });
 }
 
 exports.submit = submit;
