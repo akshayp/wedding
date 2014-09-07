@@ -67,7 +67,6 @@ function submit(req, res, next) {
     }, function (err, changedinvitation) {
 
         if (err || !changedinvitation) {
-            console.log(err);
             return res.render('rsvp', {
                 title: TITLE,
                 active: ACTIVE,
@@ -145,7 +144,7 @@ function resend(req, res, next) {
 }
 
 function login(req, res, next) {
-    var id;
+    var email;
 
     if (afterWedding()) {
         delete req.session.invitation;
@@ -153,7 +152,7 @@ function login(req, res, next) {
     }
 
     try {
-        id = email.decipherId(req.params.invitationkey);
+        email = email.decipherId(req.params.invitationkey);
     } catch (e) {
         delete req.session.invitation;
 
@@ -165,7 +164,7 @@ function login(req, res, next) {
         });
     }
 
-    guests.loadGuest(id, function (err, guest) {
+    guests.loadGuestByEmail(email, function (err, guest) {
         if (err || !guest) {
             delete req.session.invitation;
             return next(err);
