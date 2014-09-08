@@ -144,7 +144,7 @@ function resend(req, res, next) {
 }
 
 function login(req, res, next) {
-    var email;
+    var emailAdd;
 
     if (afterWedding()) {
         delete req.session.invitation;
@@ -152,7 +152,7 @@ function login(req, res, next) {
     }
 
     try {
-        email = email.decipherId(req.params.invitationkey);
+        emailAdd = email.decipherId(req.params.invitationkey);
     } catch (e) {
         delete req.session.invitation;
 
@@ -164,7 +164,7 @@ function login(req, res, next) {
         });
     }
 
-    guests.loadGuestByEmail(email, function (err, guest) {
+    guests.loadGuestByEmail(emailAdd, function (err, guest) {
         if (err || !guest) {
             delete req.session.invitation;
             return next(err);
