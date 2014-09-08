@@ -189,7 +189,7 @@ function rsvp(req, res) {
         res.locals.editing = true;
     }
 
-    return res.render('rsvp', { 
+    return res.render('rsvp', {
         title: TITLE,
         active: ACTIVE,
         message: message,
