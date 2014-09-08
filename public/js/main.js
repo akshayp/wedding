@@ -57,7 +57,7 @@
                 }
 
                 map.featureLayer.on('ready', function() {
-                    this.eachLayer(function(marker) { 
+                    this.eachLayer(function(marker) {
                         marker.openPopup();
                     });
                 });
@@ -106,6 +106,10 @@
                 $('.pure-control-group.hide').removeClass('hide');
             }
         });
+
+        if ($('#rsvpyes').attr('checked')) {
+            $('.pure-control-group.hide').removeClass('hide');
+        }
     }
 
     function initTimeline() {
