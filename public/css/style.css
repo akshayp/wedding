@@ -58,7 +58,7 @@ p {
 
 header {
     background: #000;
-    overflow: hidden;    
+    overflow: hidden;
     padding: 0 3%;
 }
 
@@ -101,6 +101,10 @@ nav li {
 
 .cf:after {
     clear: both;
+}
+
+.hide {
+  display: none;
 }
 
 .round-l-img {
@@ -431,11 +435,11 @@ a.donate-now {
         -webkit-transform: translateZ(0);
         -webkit-backface-visibility: hidden;
     }
-    
+
     .timeline-marker.is-hidden {
         visibility: hidden;
     }
-    
+
     .timeline-marker.bounce-in {
         visibility: visible;
         -webkit-animation: bounce-in 0.6s;
@@ -456,7 +460,7 @@ a.donate-now {
         border-width: 11px;
         margin-top: -11px;
     }
-    
+
     .timeline-content::after {
         border-left-color: #FFF;
         border-width: 10px;
@@ -478,7 +482,7 @@ a.donate-now {
         width: 100%;
         font-size: 2rem;
     }
-    
+
     .timeline-block:nth-child(odd) .timeline-content {
         float: right;
     }
@@ -507,7 +511,7 @@ a.donate-now {
 }
 
 /* Screens ≥ 768px */
-@media only screen 
+@media only screen
 and (min-width: 48em) {
     .accent { border: none; border-left: 1px solid #DDD; }
     .timeline-content h3 { font-size: 2.5rem; }
@@ -516,8 +520,8 @@ and (min-width: 48em) {
 }
 
 /* Tablet */
-@media only screen 
-and (min-width : 48em) 
+@media only screen
+and (min-width : 48em)
 and (max-width : 64em) {
     h1 { font-size: 2.2rem; }
     nav { font-size: 1.6rem; }
@@ -529,9 +533,9 @@ and (max-width : 64em) {
 }
 
 /* Tablet Landscape overrides*/
-@media only screen 
-and (min-width : 48em) 
-and (max-width : 64em) 
+@media only screen
+and (min-width : 48em)
+and (max-width : 64em)
 and (orientation : landscape) {
     #timeline::after { margin-left: -15px; }
     .banner { height: 400px; }

@@ -100,6 +100,12 @@
                 }
             });
         });
+
+        $('#rsvpyes').on('change', function() {
+            if ($(this).val() === 'true' ) {
+                $('.pure-control-group.hide').removeClass('hide');
+            }
+        });
     }
 
     function initTimeline() {
