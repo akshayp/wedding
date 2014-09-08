@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "async": "0.9.x",
+        "base64url": "0.0.6",
         "body-parser": "1.5.x",
         "combohandler": "0.4.x",
         "compression": "1.0.x",
