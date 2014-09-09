@@ -1,4 +1,4 @@
-{{#if message}}
+{{#is type "error"}}
     <p class="Ta-c alert alert-{{type}}">{{{message}}}</p>
 {{else}}
     <h3 class="Ta-c">Yay, We’re Happy You’ll Be Attending!</h3>
@@ -7,4 +7,4 @@
         <a href="/" class="pure-button pure-button-primary">Done</a>
     </p>
     <img src="/img/akshali.jpg" class="pure-img Mx-auto Py-10" style="width: 60%"/>
-{{/if}}
+{{/is}}
