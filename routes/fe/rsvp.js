@@ -10,6 +10,7 @@ var path  = require('path'),
     EMAIL_CONFIRMATION = 'We have sent you an email confirmation that we recieved your RSVP. Thanks for stopping by!',
     NO_RSVP = 'You forgot to pick an RSVP status to save.',
     TOO_MANY_EMAILS = 'We have sent you a confirmation more than 3 times. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
+    TOO_MANY_CHANGES = 'You have changed your RSVP more than 3 times. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us if you need to make more changes.',
     SUCCESS = 'We have emailed you the invitation link. Please click the link in your email to start the RSVP process.',
     WARNING = 'Looks like you got to this link without going to the link we emailed you first. To proceed enter your email address below so you can get the invitation key to RSVP.',
     UNAUTHORIZED = 'Unauthorized request. Looks like you\'re trying to access a link that\'s invalid. Please use the link in your email or enter your email below.';
@@ -46,10 +47,22 @@ function submit(req, res, next) {
         });
     }
 
+    var numEmails = invitation.numEmails;
+
+    if (numEmails && (numEmails > 3)) {
+        return res.render('rsvp', {
+            title: TITLE,
+            active: ACTIVE,
+            message: TOO_MANY_CHANGES,
+            type: 'error'
+        });
+    }
+
     guests.updateGuest(invitation.id, {
         attending: attending,
         plusone: plusone,
         notes: notes,
+        numEmails: numEmails + 1,
         events: {
             mehndi: {
                 invited: invitation.events.mehndi.invited,
