@@ -18,6 +18,19 @@ function sendEmail(guest, callback) {
     });
 }
 
+function sendRsvpEmailtoOnePerson(emailId) {
+    console.log('Sending email to: '.blue + emailId.green);
+
+    guests.loadGuestByEmail(emailId, function(err, guest) {
+        if (err) { throw err; }
+
+        sendEmail(guest, function() {
+            console.log('Done!'.green);
+            process.exit();
+        });
+    });
+}
+
 function sendRsvpEmails() {
     console.log('Loading invitations from database...'.blue);
 
@@ -40,6 +53,7 @@ process.stdin.once('data', function (answer) {
 
     if (answer === 'yes') {
         sendRsvpEmails();
+        //sendRsvpEmailtoOnePerson('youremail@youremail.com');
     } else {
         console.log('Aborting!'.red);
         process.exit();
