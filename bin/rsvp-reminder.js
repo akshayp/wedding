@@ -33,7 +33,7 @@ function sendRsvpEmails() {
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
-process.stdout.write('Are you sure you want to BLAST OFF EMAILS? (yes/no): ');
+process.stdout.write('Are you sure you want to BLAST OFF REMINDER EMAILS? (yes/no): ');
 
 process.stdin.once('data', function (answer) {
     answer = answer.toString().trim().toLowerCase();
