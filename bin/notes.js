@@ -11,7 +11,7 @@ function importData() {
     guests.loadGuests(function(err, data) {
         for (var guest in data) {
             var oGuest = data[guest];
-            if (oGuest.attending !== '') {
+            if (oGuest.attending !== '' && oGuest.notes) {
                 console.log(oGuest.name.yellow + " said " + oGuest.notes.blue);
             }
         }
