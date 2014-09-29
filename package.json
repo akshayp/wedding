@@ -8,7 +8,10 @@
     },
     "scripts": {
         "start": "node app",
-        "lint": "grunt lint"
+        "lint": "grunt lint",
+        "notes": "bin/notes.js",
+        "import": "bin/import.js",
+        "status": "bin/status.js"
     },
     "dependencies": {
         "async": "0.9.x",
@@ -36,7 +39,8 @@
         "request": "~2.39.0",
         "traverse": "0.6.6",
         "csvjson": "1.x",
-        "lodash": "2.x"
+        "lodash": "2.x",
+        "cli-table": "0.3.x"
     },
     "subdomain": "akshali",
     "domains": [
