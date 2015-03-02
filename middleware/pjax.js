@@ -1,5 +1,7 @@
+'use strict';
+
 module.exports = function (req, res, next) {
-    res.render_ = res.render;
+    res.oldRender = res.render;
 
     res.render = function (view, options, fn) {
         options = options || {};
@@ -8,7 +10,7 @@ module.exports = function (req, res, next) {
             options.layout = false;
         }
 
-        res.render_(view, options, fn);
+        res.oldRender(view, options, fn);
     };
 
     next();

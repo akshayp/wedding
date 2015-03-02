@@ -1,41 +1,39 @@
-/*jshint unused: false*/
+/* eslint no-unused-vars: 0, new-cap: 0*/
 'use strict';
 
-var hbs, app, router,
-    env         = process.env.NODE_ENV || 'development',
-    colors      = require('colors'),
-    http        = require('http'),
-    body        = require('body-parser'),
-    combo       = require('combohandler'),
-    compress    = require('compression'),
-    cookie      = require('cookie-parser'),
-    csrf        = require('csurf'),
-    exphbs      = require('express-handlebars'),
-    logger      = require('morgan'),
-    override    = require('method-override'),
-    session     = require('cookie-session'),
-    slash       = require('express-slash'),
-    express     = require('express'),
-    config      = require('./config'),
-    middleware  = require('./middleware'),
-    routes      = require('./routes');
+var env = process.env.NODE_ENV || 'development';
+var colors = require('colors');
+var http = require('http');
+var body = require('body-parser');
+var combo = require('combohandler');
+var compress = require('compression');
+var cookie = require('cookie-parser');
+var csrf = require('csurf');
+var exphbs = require('express-handlebars');
+var logger = require('morgan');
+var override = require('method-override');
+var session = require('cookie-session');
+var slash = require('express-slash');
+var express = require('express');
+var config = require('./config');
+var middleware = require('./middleware');
+var routes = require('./routes');
 
 /* ----- Config ----- */
 
-app = express();
+var app = express();
 
 app.enable('strict routing');
 
-router = express.Router({
+var router = express.Router({
     caseSensitive: app.get('case sensitive routing'),
-    strict       : app.get('strict routing')
+    strict: app.get('strict routing')
 });
 
-hbs = exphbs.create({
+var hbs = exphbs.create({
     defaultLayout: 'main',
     helpers: {
         is: function (value, test, options) {
-
             if (value === test) {
                 return options.fn(this);
             } else {
@@ -80,10 +78,10 @@ app.use(slash());
 app.locals = {
     version: config.version,
     nav: [
-        {id: 'wedding',   url: '/wedding/',   label: 'Wedding'},
+        {id: 'wedding', url: '/wedding/', label: 'Wedding'},
         {id: 'logistics', url: '/logistics/', label: 'Logistics'},
-        {id: 'registry',  url: '/registry/',  label: 'Registry'},
-        {id: 'rsvp',      url: '/rsvp/',      label: 'RSVP'}
+        {id: 'registry', url: '/registry/', label: 'Registry'},
+        {id: 'rsvp', url: '/rsvp/', label: 'RSVP'}
     ]
 
 };

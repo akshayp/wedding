@@ -1,25 +1,26 @@
 #!/usr/bin/env node
-/*jshint unused: false*/
+/* eslint no-unused-vars: 0*/
+'use strict';
 
-var fs = require('fs'),
-    config = require('../config'),
-    _ = require('lodash'),
-    colors = require('colors'),
-    csvjson = require('csvjson'),
-    guests  = require('../lib/guests'),
-    email  = require('../lib/email'),
-    Guest  = require('../lib/schema'),
-    data = fs.readFileSync('database.csv').toString();
+var config = require('../config');
+var _ = require('lodash');
+var colors = require('colors');
+var csvjson = require('csvjson');
+var guests = require('../lib/guests');
+var email = require('../lib/email');
+var Guest = require('../lib/schema');
 
-function importData() {
+function importData () {
     var list = csvjson.toObject('./database.csv').output,
         collection = [];
 
-    guests.loadGuests(function(err, data){
+    guests.loadGuests(function (err, data) {
         var offset = data.length + 1;
 
-        list.forEach(function(guest, index) {
-            var obj = _.find(data, function(obj) { return obj.email === guest.email });
+        list.forEach(function (guest, index) {
+            var obj = _.find(data, function (guestObj) {
+                return guestObj.email === guest.email;
+            });
 
             if (obj) {
                 console.log('✗'.red + ' Skipped: '.yellow + ' ' + guest.name.green);
@@ -59,10 +60,10 @@ function importData() {
             process.exit();
         }
 
-        Guest.create(collection, function(err, data) {
-            if (err) {
+        Guest.create(collection, function (createErr) {
+            if (createErr) {
                 console.log('Error while saving documents:'.red);
-                console.log(err)
+                console.log(err);
             }
             process.exit();
         });

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-/*jshint unused: false*/
+/* eslint no-unused-vars: 0*/
+'use strict';
 
-var async = require('async'),
-    colors = require('colors'),
-    email = require('../lib/email'),
-    guests  = require('../lib/guests');
+var async = require('async');
+var colors = require('colors');
+var email = require('../lib/email');
+var guests = require('../lib/guests');
 
-function sendEmail(guest, callback) {
+function sendEmail (guest, callback) {
     email.sendRsvpLink(guest, function (err) {
         if (err) {
             console.log(err);
@@ -18,26 +19,26 @@ function sendEmail(guest, callback) {
     });
 }
 
-function sendRsvpEmailtoOnePerson(emailId) {
+function sendRsvpEmailtoOnePerson (emailId) {
     console.log('Sending email to: '.blue + emailId.green);
 
-    guests.loadGuestByEmail(emailId, function(err, guest) {
+    guests.loadGuestByEmail(emailId, function (err, guest) {
         if (err) { throw err; }
 
-        sendEmail(guest, function() {
+        sendEmail(guest, function () {
             console.log('Done!'.green);
             process.exit();
         });
     });
 }
 
-function sendRsvpEmails() {
+function sendRsvpEmails () {
     console.log('Loading invitations from database...'.blue);
 
-    guests.loadGuests(function (err, guests) {
+    guests.loadGuests(function (err, data) {
         if (err) { throw err; }
 
-        async.eachSeries(guests, sendEmail, function () {
+        async.eachSeries(data, sendEmail, function () {
             console.log('Done!'.green);
             process.exit();
         });

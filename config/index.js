@@ -1,3 +1,5 @@
+'use strict';
+
 var env = process.env;
 
 module.exports = {
@@ -5,7 +7,7 @@ module.exports = {
     database: env.MONGOLAB_URI || 'mongodb://localhost/wedding',
 
     session: {
-        keys   : ['akshali.session'],
+        keys: ['akshali.session'],
         secret: env.SESSION_SECRET,
         cookie: {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 1 week
@@ -15,8 +17,8 @@ module.exports = {
     invitationSecret: env.INVITATION_SECRET,
 
     mailgun: {
-        domain : 'akshali.me',
-        secret : env.MAILGUN_API_KEY
+        domain: 'akshali.me',
+        secret: env.MAILGUN_API_KEY
     },
 
     email: {

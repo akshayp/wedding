@@ -1,23 +1,24 @@
 /*globals window, document, $, L*/
-
 (function (win, doc, Leaflet) {
+    'use strict';
+
     var docEl = doc.documentElement;
 
-    function viewportW() {
+    function viewportW () {
         var a = docEl.clientWidth,
             b = win.innerWidth;
 
         return a < b ? b : a;
     }
 
-    function viewportH() {
+    function viewportH () {
         var a = docEl.clientHeight,
             b = win.innerHeight;
 
         return a < b ? b : a;
     }
 
-    function calibrate(coords, cushion) {
+    function calibrate (coords, cushion) {
         var o = {};
         cushion = +cushion || 0;
         o.width = (o.right = coords.right + cushion) - (o.left = coords.left - cushion);
@@ -25,22 +26,21 @@
         return o;
     }
 
-    function inViewport(el, cushion) {
+    function inViewport (el, cushion) {
         var r = calibrate(el.getBoundingClientRect(), cushion);
         return !!r && r.bottom >= 0 && r.right >= 0 && r.top <= viewportH() && r.left <= viewportW();
     }
 
-    function getMargin(el) {
+    function getMargin (el) {
         return win.getComputedStyle(el).getPropertyValue('margin-top');
     }
 
-    function initMaps() {
+    function initMaps () {
         var maps = $('[data-map]');
 
         Leaflet.mapbox.accessToken = 'pk.eyJ1IjoiYWtzaGF5cCIsImEiOiJ0ZGhBcVJVIn0.Dky1r5eel-SHJAq8UoLnuw';
 
         if(maps) {
-
             maps.each(function () {
                 var mapNode = $(this);
 
@@ -56,8 +56,8 @@
                     map.tap.disable();
                 }
 
-                map.featureLayer.on('ready', function() {
-                    this.eachLayer(function(marker) {
+                map.featureLayer.on('ready', function () {
+                    this.eachLayer(function (marker) {
                         marker.openPopup();
                     });
                 });
@@ -65,18 +65,18 @@
         }
     }
 
-    function initNav() {
+    function initNav () {
         var nav = $('nav'),
             menuLink = $('.menu-link');
 
-        menuLink.on('click', function(e){
+        menuLink.on('click', function (e) {
             e.preventDefault();
             nav.toggleClass('D-b');
         });
     }
 
-    function initForms() {
-        $(doc).on('submit', '.pure-form', function(e) {
+    function initForms () {
+        $(doc).on('submit', '.pure-form', function (e) {
             e.preventDefault();
 
             var form = $(this),
@@ -95,13 +95,13 @@
                 headers: {
                     'X-Csrf-Token': win.csrfToken
                 },
-                success: function(data) {
-                    $('#main').html(data);
+                success: function (response) {
+                    $('#main').html(response);
                 }
             });
         });
 
-        $('#rsvpyes').on('change', function() {
+        $('#rsvpyes').on('change', function () {
             if ($(this).val() === 'true' ) {
                 $('.pure-control-group.hide').removeClass('hide');
             }
@@ -112,11 +112,11 @@
         }
     }
 
-    function initTimeline() {
+    function initTimeline () {
         var didScroll = false,
             timelineblocks = $('.timeline-block');
 
-        function showTimeline() {
+        function showTimeline () {
             didScroll = true;
         }
 
@@ -126,9 +126,8 @@
             }
         });
 
-        setInterval(function() {
+        setInterval(function () {
             if (didScroll) {
-
                 didScroll = false;
 
                 timelineblocks.each(function () {
@@ -151,5 +150,4 @@
     initNav();
     initForms();
     initTimeline();
-
 }(window, document, L));

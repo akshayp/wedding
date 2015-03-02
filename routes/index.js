@@ -1,3 +1,5 @@
+'use strict';
+
 var fe = require('./fe');
 
 module.exports = {

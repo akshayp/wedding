@@ -1,20 +1,18 @@
 'use strict';
 
+var request = require('request');
+var fs = require('fs');
+var url = require('url');
+var traverse = require('traverse');
+
 module.exports = function (grunt) {
-
-    /*jshint unused: false */
     grunt.registerTask('vendor', 'Grab latest vendor files', function () {
-        var opts = grunt.config.get('vendor'),
-            done = this.async(),
-            keys = Object.keys(opts),
-            request = require('request'),
-            fs = require('fs'),
-            url = require('url'),
-            traverse = require('traverse'),
-            numDone = 0,
-            assets, length;
+        var opts = grunt.config.get('vendor');
+        var done = this.async();
+        var keys = Object.keys(opts);
+        var numDone = 0;
 
-        assets = traverse(opts).reduce(function (acc, x) {
+        var assets = traverse(opts).reduce(function (acc, x) {
             if (this.isLeaf) {
                 acc.push(x);
             }
@@ -22,9 +20,9 @@ module.exports = function (grunt) {
             return acc;
         }, []);
 
-        length = assets.length;
+        var length = assets.length;
 
-        function onReqDone(e) {
+        function onReqDone () {
             numDone = numDone + 1;
 
             if (length === numDone) {
@@ -32,33 +30,30 @@ module.exports = function (grunt) {
             }
         }
 
-        function fetchAsset(file, lib, done) {
-            var filepath = getFileName(file, lib),
-                req;
-
-            req = request(file, grunt.log.writeln('Fetching: ' + file)).pipe(fs.createWriteStream(filepath));
-            req.on('finish', onReqDone);
-        }
-
-        function getFileName(file, lib) {
-            var path = url.parse(file).path.split('/'),
-                filename = path[path.length - 1],
-                dirpath = './public/vendor/' + lib,
-                filepath = dirpath + '/' + filename;
+        function getFileName (file, lib) {
+            var path = url.parse(file).path.split('/');
+            var filename = path[path.length - 1];
+            var dirpath = './public/vendor/' + lib;
+            var filepath = dirpath + '/' + filename;
 
             grunt.file.mkdir(dirpath);
 
             return filepath;
         }
 
+        function fetchAsset (file, lib) {
+            var filepath = getFileName(file, lib);
+            var req = request(file, grunt.log.writeln('Fetching: ' + file)).pipe(fs.createWriteStream(filepath));
+            req.on('finish', onReqDone);
+        }
 
         keys.forEach(function (key) {
             var val = opts[key];
 
             if (val instanceof Array) {
-                val.forEach(function (file) { fetchAsset(file, key, done); });
+                val.forEach(function (file) { fetchAsset(file, key); });
             } else {
-                fetchAsset(val, key, done);
+                fetchAsset(val, key);
             }
         });
     });

@@ -58,8 +58,10 @@
             "no-invalid-regexp": 2,
             "no-irregular-whitespace": 2,
             "no-mixed-spaces-and-tabs": 2,
+            "no-process-exit": 0,
             "no-trailing-spaces": 2,
             "no-undef": 2,
+            "no-underscore-dangle": 0,
             "no-unused-vars": 2,
             "no-use-before-define": 2,
             "padded-blocks": [2, "never"],
@@ -70,7 +72,6 @@
             "wrap-iife": 2
         },
         "env": {
-            "browser": true,
             "node": true
         }
     }

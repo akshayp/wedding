@@ -1,5 +1,7 @@
+'use strict';
+
 module.exports = function (req, res, next) {
-    var invitation   = req.invitation;
+    var invitation = req.invitation;
 
     req.isAuthorized = invitation && invitation.invitation === req.params.invitation;
 

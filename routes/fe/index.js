@@ -1,3 +1,5 @@
+'use strict';
+
 exports.home = function (req, res) {
     res.render('index', { title: 'Welcome to Akshali\'s Wedding Site' });
 };
@@ -13,4 +15,3 @@ exports.registry = function (req, res) {
 exports.wedding = function (req, res) {
     res.render('wedding', { title: 'Akshali\'s Wedding Events', active: 'wedding' });
 };
-

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-/*jshint unused: false*/
+/* eslint no-unused-vars: 0*/
+'use strict';
 
-var async = require('async'),
-    colors = require('colors'),
-    email = require('../lib/email'),
-    guests  = require('../lib/guests');
+var async = require('async');
+var colors = require('colors');
+var email = require('../lib/email');
+var guests = require('../lib/guests');
 
-function sendEmail(guest, callback) {
-
+function sendEmail (guest, callback) {
     if (guest.events.reception.attending) {
         email.sendReminder(guest, function (err) {
             if (err) {
@@ -24,13 +24,13 @@ function sendEmail(guest, callback) {
     }
 }
 
-function sendRsvpEmails() {
+function sendRsvpEmails () {
     console.log('Loading invitations from database...'.blue);
 
-    guests.loadGuests(function (err, guests) {
+    guests.loadGuests(function (err, data) {
         if (err) { throw err; }
 
-        async.eachSeries(guests, sendEmail, function () {
+        async.eachSeries(data, sendEmail, function () {
             console.log('Done!'.green);
             process.exit();
         });

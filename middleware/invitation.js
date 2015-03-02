@@ -1,3 +1,4 @@
+'use strict';
 var guests = require('../lib/guests');
 
 module.exports = function (req, res, next) {

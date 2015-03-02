@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-/*jshint unused: false*/
+/* eslint no-unused-vars: 0*/
+'use strict';
 
-var fs = require('fs'),
-    Table = require('cli-table'),
-    config = require('../config'),
-    colors = require('colors'),
-    guests  = require('../lib/guests'),
-    invitedCount = 0,
+var Table = require('cli-table');
+var colors = require('colors');
+var guests = require('../lib/guests');
+
+var invitedCount = 0,
     attendingCount = 0,
     notattendingCount = 0,
     norsvpCount = 0,
@@ -16,11 +16,15 @@ var fs = require('fs'),
 
 var table = new Table({
     head: ['Name', 'Plus One', 'Mehndi', 'Ceremony', 'Reception'],
-    colAligns : [null, null, 'center', 'center', 'center']
+    colAligns: [null, null, 'center', 'center', 'center']
 });
 
 //guests.loadGuestsByStatus('', function(err, data) {
-guests.loadGuests(function(err, data) {
+guests.loadGuests(function (err, data) {
+    if(err) {
+        console.log('Error loading guests'.red);
+        return;
+    }
     for (var guest in data) {
         var oGuest = data[guest],
             NOTHING = '-'.yellow,

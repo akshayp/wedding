@@ -1,8 +1,11 @@
-var path  = require('path'),
-    config = require('../../config'),
-    email = require('../../lib/email'),
-    guests = require('../../lib/guests'),
-    TITLE = 'Akshali\'s Wedding RSVP',
+'use strict';
+
+var path = require('path');
+var config = require('../../config');
+var email = require('../../lib/email');
+var guests = require('../../lib/guests');
+
+var TITLE = 'Akshali\'s Wedding RSVP',
     ACTIVE = 'rsvp',
     NOT_IN_LIST = 'We could not find you in our list. Please <a class="LightText Td-u Fw-b" href="mailto:rsvp@akshali.me">reach out</a> to us to RSVP.',
     NO_EMAIL = 'Provide a valid email address.',
@@ -16,7 +19,7 @@ var path  = require('path'),
     UNAUTHORIZED = 'Unauthorized request. Looks like you\'re trying to access a link that\'s invalid. Please use the link in your email or enter your email below.';
 
 
-function stringToBool(val) {
+function stringToBool (val) {
     val = val || '';
     return (val + '').toLowerCase() === 'true';
 }
@@ -25,7 +28,7 @@ function afterWedding () {
     return Date.now() > config.date;
 }
 
-function submit(req, res, next) {
+function submit (req, res, next) {
     var invitation = req.invitation,
         attending = stringToBool(req.body.attending),
         plusone = req.body.plusone || '',
@@ -78,7 +81,6 @@ function submit(req, res, next) {
             }
         }
     }, function (err, changedinvitation) {
-
         if (err || !changedinvitation) {
             return res.render('rsvp', {
                 title: TITLE,
@@ -90,8 +92,10 @@ function submit(req, res, next) {
 
         res.locals.invitation = changedinvitation;
 
-        email.sendConfirm(changedinvitation, function (err) {
-            if (err) { return next(err); }
+        email.sendConfirm(changedinvitation, function (sendErr) {
+            if (sendErr) {
+                return next(sendErr);
+            }
 
             return res.render('rsvp', {
                 title: TITLE,
@@ -103,8 +107,7 @@ function submit(req, res, next) {
     });
 }
 
-function resend(req, res, next) {
-
+function resend (req, res, next) {
     var emailAddress = req.body.email.trim();
 
     if (afterWedding()) {
@@ -139,12 +142,14 @@ function resend(req, res, next) {
             });
         }
 
-        email.sendRsvpLink(guest, function (err) {
-            if (err) { return next(err); }
+        email.sendRsvpLink(guest, function (rsvpErr) {
+            if (rsvpErr) {
+                return next(rsvpErr);
+            }
 
             var numEmails = guest.numEmails;
 
-            guests.updateGuest(guest.id, { numEmails: numEmails + 1 }, function() {
+            guests.updateGuest(guest.id, { numEmails: numEmails + 1 }, function () {
                 return res.render('rsvp', {
                     title: TITLE,
                     active: ACTIVE,
@@ -156,7 +161,7 @@ function resend(req, res, next) {
     });
 }
 
-function login(req, res, next) {
+function login (req, res, next) {
     var emailAdd;
 
     if (afterWedding()) {
@@ -190,7 +195,7 @@ function login(req, res, next) {
 }
 
 
-function rsvp(req, res) {
+function rsvp (req, res) {
     var invitation = req.invitation,
         message = invitation ? '' : WARNING;
 
@@ -211,6 +216,6 @@ function rsvp(req, res) {
 }
 
 exports.submit = submit;
-exports.resend  = resend;
-exports.login  = login;
-exports.index  = rsvp;
+exports.resend = resend;
+exports.login = login;
+exports.index = rsvp;
