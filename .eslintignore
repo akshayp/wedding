@@ -1,0 +1,4 @@
+node_modules/*
+public/vendor/**/*.js
+public/js/vendor.js
+artifacts/*
