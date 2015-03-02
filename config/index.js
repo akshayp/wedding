@@ -2,7 +2,7 @@ var env = process.env;
 
 module.exports = {
 
-    database: env.CONNECTION_STRING || 'mongodb://localhost/wedding',
+    database: env.MONGOLAB_URI || 'mongodb://localhost/wedding',
 
     session: {
         keys   : ['akshali.session'],
