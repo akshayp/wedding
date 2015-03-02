@@ -8,7 +8,7 @@
     },
     "scripts": {
         "start": "node app",
-        "lint": "eslint .",
+        "test": "eslint .",
         "notes": "bin/notes.js",
         "import": "bin/import.js",
         "status": "bin/status.js"
