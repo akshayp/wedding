@@ -26,21 +26,21 @@
         "express": "^4.12.1",
         "express-slash": "^2.0.1",
         "express-handlebars": "^1.2.1",
-        "mailgun-js": "^0.6.8",
         "method-override": "^2.3.1",
         "mongoose": "^3.8.24",
         "morgan": "^1.5.1"
     },
     "devDependencies": {
-        "grunt": "^0.4.5",
-        "grunt-contrib-uglify": "^0.8.0",
-        "grunt-contrib-concat": "^0.5.1",
-        "eslint": "^0.15.0",
-        "request": "^2.53.0",
-        "traverse": "0.6.6",
+        "cli-table": "^0.3.1",
         "csvjson": "^1.0.3",
+        "eslint": "^0.15.0",
+        "grunt": "^0.4.5",
+        "grunt-contrib-concat": "^0.5.1",
+        "grunt-contrib-uglify": "^0.8.0",
         "lodash": "^3.3.1",
-        "cli-table": "^0.3.1"
+        "mailgun-js": "^0.6.8",
+        "request": "^2.53.0",
+        "traverse": "0.6.6"
     },
     "subdomain": "akshali",
     "domains": [
