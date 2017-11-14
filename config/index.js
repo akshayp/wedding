@@ -3,7 +3,6 @@
 var env = process.env;
 
 module.exports = {
-
     database: env.MONGOLAB_URI || 'mongodb://localhost/wedding',
 
     session: {
@@ -17,7 +16,7 @@ module.exports = {
     invitationSecret: env.INVITATION_SECRET,
 
     mailgun: {
-        domain: 'akshali.me',
+        domain: 'akshali.org',
         secret: env.MAILGUN_API_KEY
     },
 
