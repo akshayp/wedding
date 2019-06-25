@@ -34,11 +34,11 @@
     "devDependencies": {
         "cli-table": "^0.3.1",
         "csvjson": "^1.0.3",
-        "eslint": "^0.15.0",
+        "eslint": "^4.18.2",
         "grunt": "^0.4.5",
         "grunt-contrib-concat": "^0.5.1",
         "grunt-contrib-uglify": "^0.8.0",
-        "lodash": "^3.3.1",
+        "lodash": "^4.17.11",
         "request": "^2.53.0",
         "traverse": "0.6.6"
     },
